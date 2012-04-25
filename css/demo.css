@@ -1,0 +1,210 @@
+/* html, body { height: 100%; } */
+ul#charges-list li div.list-cal {
+    float: left;
+    width: 60px;
+    padding: 2px 2px 2px 0;
+    overflow: auto;
+    border-right: 1px solid #CCCCCC;
+}
+ul#charges-list li div.list-partial {
+    float: left;
+    overflow: auto;
+    padding: 4px 10px;
+    color: #06467C;
+}
+ul#charges-list li div.list-amount {
+    float: right;
+    margin-right: 25px;
+    overflow: auto;
+    padding-top: 1.25em;
+    font-size: 10pt;
+}
+div.cal-top {
+    font-size: 8pt;
+    text-align: center;
+}
+div.cal-bot {
+    font-size: 16pt;
+    text-align: center;
+}
+div.part-name {
+    font-weight: bold;
+    font-size: 10pt;
+    padding-top: 0.5em;
+}
+div.part-addr {
+    font-weight: normal;
+    font-size: 10pt;
+    line-height: 0.9em;
+}
+ul#charges-list a.ui-link-inherit {
+    padding: 0.3em 16px 0.3em 6px !important;
+}
+div.card-bits {
+    background: -moz-linear-gradient(#FFF, #DDD);
+    background: -webkit-linear-gradient(#FFF, #DDD);
+    border-bottom: 1px solid #BBB;
+    padding: 1px 0 0 0 !important;
+}
+div.card-bits span.card-type {
+    color: #06467C;
+    font-weight: bold;
+    font-size: 10pt;
+    padding: 15px 0 0 15px;
+    margin: 0;
+/*
+    -moz-box-shadow: 0;
+    -webkit-box-shadow: 0;
+*/
+    line-height: 1.8em;
+}
+div#last-4-digits,
+div#last-4-digits-detail,
+div#last-4-digits-dispute {
+    float: right;
+    border-left: 1px solid #CCC;
+    margin: 0;
+    padding: 0 0 0 10px;
+}
+div#last-4-digits div.ui-select,
+div#last-4-digits-detail div.ui-select,
+div#last-4-digits-dispute div.ui-select {
+    float: right;
+    font-size: 15pt;
+}
+
+div#charge-details,
+div#charge-list,
+div#dispute-confirmation,
+div#survey-form {
+    background-color: #06467C;
+    color: white;
+    text-shadow: none;
+}
+div#charge-list div.heading {
+    text-align: center;
+    font-size: 14pt;
+    color: white;
+}
+
+.ui-bar-a {
+    text-shadow: none !important;
+}
+
+.detail-type {
+    color: #06467C;
+    font-size: 8pt;
+}
+
+ul#charge-details-values li {
+    padding: 8px 5px;
+}
+ul#charge-details-values li div.ui-grid-b {
+    padding: 5px 0px;
+}
+ul#charge-details-values li div.double {
+    width: 66.666%;
+    font-size: 8pt;
+}
+
+.top-border {
+    border-top: 1px solid #CCC;
+}
+
+div#dispute-confirmation ul li.heading {
+    text-align: center;
+    background: #c1272d;
+}
+
+div#dispute-confirmation ul li.message {
+    white-space: normal;
+    text-align: center;
+    font-size: 10pt;
+}
+
+div#dispute-confirmation a {
+    color: #06467C;
+    font-size: 10pt;
+}
+
+div#charge-details a {
+    color: #06467C;
+    font-size: 10pt;
+}
+
+.ui-icon-cross {
+    background: url("../img/cross.png") no-repeat !important;
+    padding-left: 22px;
+}
+
+.big-btn {
+    background: url("../img/btn-bg.png") repeat-x !important;
+    width: 100% !important;
+    height: 33px !important;
+    float: left;
+    margin: 0 !important;
+    -webkit-border-radius: 4px !important;
+    -moz-border-radius: 4px !important;
+    border-radius: 4px !important;
+}
+
+.big-btn .ui-btn-text {
+    font-size: 14px !important;
+    color: #0b335c !important;
+    background: url("../img/cross.png") no-repeat scroll 0px 1px transparent;
+    padding-left: 19px;
+    height: 14px;
+}
+
+.big-btn .ui-icon {
+    display: none;
+}
+
+.logo {
+    background: url("../img/logo.png") no-repeat;
+    width: 320px;
+    height: 39px;
+}
+
+
+ul.rating li {
+    border-right: 1px solid #b7b7b7;
+    border-left: 1px solid #fff;
+    background: url("../img/rating-bg.png") repeat-x;
+    width: 54px;
+    height: 33px;
+    display: inline;
+    float: left;
+}
+
+.star {
+    background: url("../img/stars.png") no-repeat;
+    width: 21px;
+    height: 21px;
+    background-position: 0 0;
+    float: left;
+    margin: 5px 0 5px 16px;
+}
+
+.star-act {
+    background: url("../img/stars.png") no-repeat;
+    width: 21px;
+    height: 21px;
+    background-position: -23px 0;
+    float: left;
+    margin: 5px 0 5px 16px;
+}
+
+.first {
+    -webkit-border-radius: 4px 0px 0px 4px;
+    -moz-border-radius: 4px 0px 0px 4px;
+    border-radius: 4px 0px 0px 4px;
+}
+
+.last {
+    -webkit-border-radius: 0px 4px 4px 0px;
+    -moz-border-radius: 0px 4px 4px 0px;
+    border-radius: 0px 4px 4px 0px;
+    border-right: 0 !important;
+}
+

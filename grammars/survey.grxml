@@ -1,0 +1,14 @@
+<?xml version= "1.0"?>
+
+<grammar xmlns="http://www.w3.org/2001/06/grammar" version="1.0"
+  xml:lang="en-US" root="rootrule" tag-format="semantics/1.0">
+  <rule id="rootrule" scope="public">
+    <one-of>
+      <item>one</item>
+      <item>two</item>
+      <item>three</item>
+      <item>four</item>
+      <item>five</item>
+    </one-of>
+  </rule>
+</grammar>
