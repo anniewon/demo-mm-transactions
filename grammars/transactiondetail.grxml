@@ -4,8 +4,10 @@
   xml:lang="en-US" root="rootrule" tag-format="semantics/1.0">
   <rule id="rootrule" scope="public">
     <one-of>
-      <item>dispute</item>
-      <item>back</item>
+      <item>Dispute this charge</item>
+      <item>Next charge</item>
+      <item>Previous charge</item>
+      <item>Go back</item>
       <item>chat</item>
     </one-of>
   </rule>

@@ -30,7 +30,7 @@
 
 <div data-role="page" id="main-menu" data-title="Main Menu">
   <script type="text/javascript">
-/* TODO:
+/*
     // Load the account data
     AccountData.account.initDropdown("last-4-digits-main", g_acct_number, null, function(dropdown, results) {
         // Callback sets up onchange handler for dropdown
@@ -62,15 +62,26 @@
       <div class="ui-block-b" style="text-align: right; color: white; text-shadow: none">Due: Jan-10-2012</div>
     </div>
     <!-- Navigation -->
-    <ul id="action-list" data-role="listview" data-inset="true">
-      <li><a href="#recent-transactions" data-url="#recent-transactions"><div>Recent Transactions</div></a></li>
-      <li><a data-url=""><div>Make a Payment</div></a></li>
-      <li><a data-url=""><div>Find an ATM</div></a></li>
-      <li><a data-url=""><div>Reward Points</div></a></li>
-      <li><a data-url=""><div>Dispute a Charge</div></a></li>
-      <li><a data-url=""><div>Report Missing Card</div></a></li>
-      <li><a data-url=""><div>Update Profile</div></a></li>
-    </ul>
+    <div class="ui-grid-b">
+      <div class="ui-block-a main-menu-item-cont">
+        <img src="img/menu1.png" class="main-menu-item" onclick='$.mobile.changePage($("#recent-transactions"))' />
+      </div>
+      <div class="ui-block-b main-menu-item-cont">
+        <img src="img/menu2.png" class="main-menu-item" onclick='javascript:;' />
+      </div>
+      <div class="ui-block-c main-menu-item-cont">
+        <img src="img/menu3.png" class="main-menu-item" onclick='javascript:;' />
+      </div>
+      <div class="ui-block-a main-menu-item-cont">
+        <img src="img/menu4.png" class="main-menu-item" onclick='javascript:;' />
+      </div>
+      <div class="ui-block-b main-menu-item-cont">
+        <img src="img/menu5.png" class="main-menu-item" onclick='javascript:;' />
+      </div>
+      <div class="ui-block-c main-menu-item-cont">
+        <img src="img/menu6.png" class="main-menu-item" onclick='javascript:;' />
+      </div>
+    </div>
   </div>
 
   <!-- Throw-down footer

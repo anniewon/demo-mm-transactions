@@ -71,6 +71,19 @@
     background: none !important;
 }
 
+/* Main menu */
+
+.main-menu-item-cont {
+    max-height: 95px;
+}
+
+.main-menu-item {
+    height: 95px;
+    width: 100%;
+}
+
+/* Recent transactions and transaction details */
+
 ul#charges-list li div.list-cal {
     float: left;
     width: 60px;
