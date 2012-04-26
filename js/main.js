@@ -30,6 +30,27 @@ function emptyGrammarHandler(result) {
 
 //-----------------------------------------------------------------------------
 
+function mainmenu_init() {
+  NativeBridge.setGrammar(gResourceRootUrl + "grammars/mainmenu.grxml", null, mainmenu_grammarHandler);
+}
+
+function mainmenu_grammarHandler(result) {
+  if (result != null && result.length > 0) {
+    var interp = result[0].interpretation;
+    if (interp == "recent charges") {
+      $.mobile.changePage($("#recent-transactions"));
+    } else if (interp == "chat") {
+      $.mobile.changePage($("#chat"));
+    } else {
+      alert("Bad input:" + interp + ".");
+    }
+  } else {
+    alert("No input.");
+  }
+}
+
+//-----------------------------------------------------------------------------
+
 function recenttransactions_init() {
   NativeBridge.setGrammar(gResourceRootUrl + "grammars/recenttransactions.grxml", null, recenttransactions_grammarHandler);
 }
@@ -56,6 +77,7 @@ function transactiondetail_init() {
   var transaction_id = getUrlVar("transaction_id");
   AccountData.account.initDropdown("last-4-digits-detail", g_acct_number, cc_number, null);
   AccountData.transactions.displayTransaction(cc_number, transaction_id);
+  $("#dispute-button").attr("href", "#dispute?cc_number=" + cc_number + "&transaction_id=" + transaction_id);
   NativeBridge.setGrammar(gResourceRootUrl + "grammars/transactiondetail.grxml", null, transactiondetail_grammarHandler);
 }
 
@@ -111,20 +133,15 @@ function survey_grammarHandler(result) {
   if (result != null && result.length > 0) {
     var interp = result[0].interpretation;
     if (interp == "one") {
-      survey_updateStars(1, 5);
-      //$("#rating-1").attr('checked', true).checkboxradio('refresh', true);
+      survey_doStar(0);
     } else if (interp == "two") {
-      survey_updateStars(2, 5);
-      //$("#rating-2").attr('checked', true).checkboxradio('refresh', true);
+      survey_doStar(1);
     } else if (interp == "three") {
-      survey_updateStars(3, 5);
-      //$("#rating-3").attr('checked', true).checkboxradio('refresh', true);
+      survey_doStar(2);
     } else if (interp == "four") {
-      survey_updateStars(4, 5);
-      //$("#rating-4").attr('checked', true).checkboxradio('refresh', true);
+      survey_doStar(3);
     } else if (interp == "five") {
-      survey_updateStars(5, 5);
-      //$("#rating-5").attr('checked', true).checkboxradio('refresh', true);
+      survey_doStar(4);
     } else if (interp == "back") {
       history.back();
     } else if (interp == "chat") {
@@ -157,14 +174,4 @@ function survey_doStar(vid){
             }
         }
     }
-}
-
-function survey_updateStars(rating, max) {
-  var i;
-  for (i = 0; i <= rating; i++) {
-    $("#star-" + i).attr("style", "background: url(img\/star.gif) no-repeat; background-position: 0 -64px;");
-  }
-  for (i = rating + 1; i <= max; i++) {
-    $("#star-" + i).attr("style", "background: url(img\/star.gif) no-repeat;");
-  }
 }

@@ -1,4 +1,76 @@
 /* html, body { height: 100%; } */
+
+.ui-page {
+    background: #013b70 url(../img/bg.png) no-repeat !important;
+    width: 320px;
+    min-height: 480px;
+}
+
+.ui-content {
+    padding: 10px !important;
+}
+
+.page-content {
+    width: 100%;
+    background: #fff;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    float: left;
+}
+
+.logo {
+    background: url("../img/logo.png") no-repeat;
+    width: 320px;
+    height: 42px;
+}
+
+/* Buttons */
+
+.ui-icon-cross {
+    background: url("../img/cross.png") no-repeat !important;
+    padding-left: 22px;
+}
+
+.ui-btn-inner {
+    padding: 0.6em 10px !important;
+    font-size: 12px;
+}
+
+.btn-cont {
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.big-btn {
+    background: url("../img/btn-bg.png") repeat-x !important;
+    width: 100% !important;
+    height: 33px !important;
+    float: left;
+    margin: 0 !important;
+    -webkit-border-radius: 4px !important;
+    -moz-border-radius: 4px !important;
+    border-radius: 4px !important;
+}
+
+.big-btn .ui-btn-text {
+    font-size: 14px !important;
+    color: #0b335c !important;
+    background: url("../img/cross.png") no-repeat scroll 0px 1px transparent;
+    padding-left: 19px;
+    height: 14px;
+}
+
+.big-btn .ui-icon {
+    display: none;
+}
+
+.no-icon .ui-btn-text {
+    background: none !important;
+}
+
 ul#charges-list li div.list-cal {
     float: left;
     width: 60px;
@@ -49,38 +121,28 @@ div.card-bits {
 div.card-bits span.card-type {
     color: #06467C;
     font-weight: bold;
-    font-size: 10pt;
+    font-size: 12pt;
     padding: 15px 0 0 15px;
     margin: 0;
-/*
-    -moz-box-shadow: 0;
-    -webkit-box-shadow: 0;
-*/
     line-height: 1.8em;
 }
-div#last-4-digits,
-div#last-4-digits-detail,
-div#last-4-digits-dispute {
+.card-info {
     float: right;
     border-left: 1px solid #CCC;
     margin: 0;
     padding: 0 0 0 10px;
 }
-div#last-4-digits div.ui-select,
-div#last-4-digits-detail div.ui-select,
-div#last-4-digits-dispute div.ui-select {
+.card-info div.ui-select {
     float: right;
     font-size: 15pt;
 }
 
 div#charge-details,
-div#charge-list,
-div#dispute-confirmation,
-div#survey-form {
-    background-color: #06467C;
+div#charge-list {
     color: white;
     text-shadow: none;
 }
+
 div#charge-list div.heading {
     text-align: center;
     font-size: 14pt;
@@ -111,61 +173,95 @@ ul#charge-details-values li div.double {
     border-top: 1px solid #CCC;
 }
 
-div#dispute-confirmation ul li.heading {
+/* Dispute confirmation */
+
+.dispute-header {
     text-align: center;
-    background: #c1272d;
+    background: -moz-linear-gradient(top, #e11b21 0%, #a01418 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e11b21),
+        color-stop(100%, #a01418) ); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #e11b21 0%, #a01418 100%);
+    color: white;
+    text-shadow: none;
 }
 
-div#dispute-confirmation ul li.message {
-    white-space: normal;
-    text-align: center;
-    font-size: 10pt;
+.dispute-short-msg {
+    width: 70px;
+    margin: 0 auto;
+    height: auto;
+    padding-left: 25px;
+    background: url("../img/chk-icon.png") no-repeat scroll 0 -2px transparent;
 }
 
-div#dispute-confirmation a {
-    color: #06467C;
-    font-size: 10pt;
-}
-
-div#charge-details a {
-    color: #06467C;
-    font-size: 10pt;
-}
-
-.ui-icon-cross {
-    background: url("../img/cross.png") no-repeat !important;
-    padding-left: 22px;
-}
-
-.big-btn {
-    background: url("../img/btn-bg.png") repeat-x !important;
-    width: 100% !important;
-    height: 33px !important;
+.dispute-detailed-msg {
+    color: #353535;
+    font-size: 13px;
+    font-weight: bold;
     float: left;
-    margin: 0 !important;
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Survey */
+
+.help-msg {
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 0px -1px 0px #555;
+    display: block;
+    text-align: center;
+    margin: 5px 0 15px 0;
+    font-weight: bold;
+}
+
+.survey {
+    width: 100%;
+    float: left;
+}
+
+.survey p {
+    color: #353535;
+    font-size: 13px;
+    font-weight: bold;
+    float: left;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+textarea {
     -webkit-border-radius: 4px !important;
     -moz-border-radius: 4px !important;
     border-radius: 4px !important;
 }
 
-.big-btn .ui-btn-text {
-    font-size: 14px !important;
-    color: #0b335c !important;
-    background: url("../img/cross.png") no-repeat scroll 0px 1px transparent;
-    padding-left: 19px;
-    height: 14px;
+ul.rating {
+    border: 1px solid #b7b7b7;
+    -webkit-border-radius: 4px !important;
+    -moz-border-radius: 4px !important;
+    border-radius: 4px !important;
+    -webkit-box-shadow: 0 8px 6px -8px #ccc;
+    -moz-box-shadow: 0 8px 6px -8px #ccc;
+    box-shadow: 0 8px 6px -8px #ccc;
+    list-style-type: none;
+    float: left;
+    padding: 0 !important;
+    width: 280px;
+    margin: 0;
+    margin-bottom: 10px;
 }
 
-.big-btn .ui-icon {
-    display: none;
+.no-bor {
+    border: 0 !important;
 }
 
-.logo {
-    background: url("../img/logo.png") no-repeat;
-    width: 320px;
-    height: 39px;
+.field {
+    float: left;
+    width: 280px;
+    padding: 10px;
+    border-bottom: 1px solid #cccdcd;
 }
-
 
 ul.rating li {
     border-right: 1px solid #b7b7b7;
@@ -207,4 +303,9 @@ ul.rating li {
     border-radius: 0px 4px 4px 0px;
     border-right: 0 !important;
 }
+
+
+
+
+
 
