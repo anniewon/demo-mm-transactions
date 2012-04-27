@@ -4,11 +4,11 @@
   xml:lang="en-US" root="rootrule" tag-format="semantics/1.0">
   <rule id="rootrule" scope="public">
     <one-of>
-      <item>one</item>
-      <item>two</item>
-      <item>three</item>
-      <item>four</item>
-      <item>five</item>
+      <item>main menu</item>
+      <item>start over</item>
+      <item>submit</item>
+      <item>help</item>
+      <item>agent</item>
     </one-of>
   </rule>
 </grammar>

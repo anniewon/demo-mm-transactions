@@ -4,9 +4,12 @@
   xml:lang="en-US" root="rootrule" tag-format="semantics/1.0">
   <rule id="rootrule" scope="public">
     <one-of>
+      <item>back to list</item>
+      <item>main menu</item>
+      <item>start over</item>
       <item>continue</item>
-      <item>back</item>
-      <item>chat</item>
+      <item>help</item>
+      <item>agent</item>
     </one-of>
   </rule>
 </grammar>

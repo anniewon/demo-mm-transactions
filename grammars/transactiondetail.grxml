@@ -4,11 +4,12 @@
   xml:lang="en-US" root="rootrule" tag-format="semantics/1.0">
   <rule id="rootrule" scope="public">
     <one-of>
-      <item>Dispute this charge</item>
-      <item>Next charge</item>
-      <item>Previous charge</item>
-      <item>Go back</item>
-      <item>chat</item>
+      <item>dispute this charge</item>
+      <item>next charge</item>
+      <item>previous charge</item>
+      <item>go back</item>
+      <item>help</item>
+      <item>agent</item>
     </one-of>
   </rule>
 </grammar>

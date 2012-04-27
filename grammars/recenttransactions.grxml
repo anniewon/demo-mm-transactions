@@ -4,8 +4,8 @@
   xml:lang="en-US" root="rootrule" tag-format="semantics/1.0">
   <rule id="rootrule" scope="public">
     <one-of>
-      <item>recent</item>
-      <item>chat</item>
+      <item>help</item>
+      <item>agent</item>
     </one-of>
   </rule>
 </grammar>

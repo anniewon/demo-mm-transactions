@@ -2,8 +2,7 @@ var AccountData = AccountData || {};
 var g_acct_number = 1;
 
 // Use this BaseUrl attribute to change the global location of the data
-AccountData.BaseUrl = location.protocol + '//' +
-    location.hostname + '/247demo/transactions/data/acctdata';
+AccountData.BaseUrl = location.protocol + '//' + location.hostname + '/content/transdemo/data/acctdata';
 
 /*
  * Account Data Loader
