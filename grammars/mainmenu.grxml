@@ -2,25 +2,37 @@
 
 <grammar xmlns="http://www.w3.org/2001/06/grammar" version="1.0"
   xml:lang="en-US" root="rootrule" tag-format="semantics/1.0">
+
   <rule id="rootrule" scope="public">
+    <one-of>
+      <item><ruleref uri="#recent"/><tag>out = "recent transactions"</tag></item>
+      <item>make a payment</item>
+      <item>find an a t m</item>
+      <item>rewards points</item>
+      <item>contact us</item>
+      <item><ruleref uri="#report"/><tag>out = "report missing"</tag></item>
+      <item><ruleref uri="#chat"/><tag>out = "chat"</tag></item>
+    </one-of>
+  </rule>
+
+  <rule id="recent" scope="private">
+    <one-of>
+      <item>recent charges</item>
+      <item>recent transactions</item>
+    </one-of>
+  </rule>
+
+  <rule id="report" scope="private">
+    <one-of>
+      <item>report a lost card</item>
+      <item>report a stolen card</item>
+    </one-of>
+  </rule>
+
+  <rule id="chat" scope="private">
     <one-of>
       <item>help</item>
       <item>agent</item>
-      <item>contact us</item>
-      <item>recent charges</item>
-      <item>recent transactions</item>
-      <item>find an a t m</item>
-      <item>
-        report
-        a
-        <one-of>
-          <item>lost</item>
-          <item>stolen</item>
-        </one-of>
-         card
-      </item>
-      <item>make a payment</item>
-      <item>rewards points</item>
     </one-of>
   </rule>
 </grammar>

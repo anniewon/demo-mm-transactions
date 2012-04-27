@@ -111,7 +111,8 @@
   <!-- Funky-fresh fixed header -->
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo"></div>
-    <a href="#main-list" data-rel="back" data-role="button" data-icon="">Back</a>
+    <!-- Don't use data-rel="back", just force it to go to the main menu -->
+    <a href="#main-menu" data-rel="" data-role="button" data-icon="">Back</a>
     <a href="#pay-now" data-role="button" data-icon="">Pay Now</a>
     <div data-role="content" id="card-bits" class="card-bits" data-theme="d">
       <span class="card-type" data-role="content">Personal Credit Card</span>
@@ -287,6 +288,10 @@
 </div>
 
 <div id="chat" data-role="page">
+  <script type="text/javascript">
+    $('#chat').live('pagebeforeshow', chat_init);
+  </script>
+
   <!-- Funky-fresh fixed header -->
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo"></div>

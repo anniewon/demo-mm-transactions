@@ -48,42 +48,36 @@ function mainmenu_init() {
 function mainmenu_grammarHandler(result) {
   if (result != null && result.length > 0) {
     var interp = result[0].interpretation.toLowerCase();
-    NativeBridge.log("mainmenu_grammarHandler - interpretation: " + interp);
-    if (interp == "recent charges" ||
-        interp == "recent transactions") {
+    NativeBridge.log("mainmenu_grammarHandler - reco result: " + interp);
+
+    // TODO:
+    // Recent charges since <the 24th of April>
+    // Recent charges from <Vons>
+
+    if (interp == "recent transactions") {        
       mainmenu_reco_errors = 0;
       $.mobile.changePage($("#recent-transactions"));
-/*
-    } else if (/(recent charges since )(.*)/.test(str)) {
-      // ex: recent charges since <the 24th of April>
-      NativeBridge.log(RegExp.$2);
-      mainmenu_reco_errors = 0;
-      // TODO:
-    } else if (/(recent charges from )(.*)/.test(str)) {
-      // ex: recent charges from <Vons>
-      NativeBridge.log(RegExp.$2);
-      mainmenu_reco_errors = 0;
-      // TODO:
-*/
-    } else if (interp == "contact us" ||
+
+    } else if (interp == "make a payment" ||
                interp == "find an a t m" ||
-               interp == "report a lost card" ||
-               interp == "report a stolen card" ||
-               interp == "make a payment" ||
-               interp == "rewards points") {
+               interp == "rewards points" ||
+               interp == "contact us" ||
+               interp == "report missing") {     
       // not implemented
       NativeBridge.log("mainmenu_grammarHandler - not implemented");
       mainmenu_reco_errors++;
-    } else if (interp == "help" || interp == "agent") {
+
+    } else if (interp == "chat") {
       mainmenu_reco_errors = 0;
       $.mobile.changePage($("#chat"));
+
     } else {
       mainmenu_reco_errors++;
-      NativeBridge.log("mainmenu_grammarHandler - Bad input:" + interp + ".");
+      NativeBridge.log("mainmenu_grammarHandler - unhandled:" + interp + ".");
     }
   } else {
     mainmenu_reco_errors++;
-    NativeBridge.log("mainmenu_grammarHandler - No input.");
+    NativeBridge.log("mainmenu_grammarHandler - no reco result.");
   }
 
   NativeBridge.log("mainmenu_grammarHandler - mainmenu_reco_errors: " + mainmenu_reco_errors);
@@ -110,28 +104,41 @@ function recenttransactions_init() {
 function recenttransactions_grammarHandler(result) {
   if (result != null && result.length > 0) {
     var interp = result[0].interpretation.toLowerCase();
-    NativeBridge.log("recenttransactions_grammarHandler - interpretation: " + interp);
-    if (interp == "help" || interp == "agent") {
+    NativeBridge.log("recenttransactions_grammarHandler - reco result: " + interp);
+
+    // TODO:
+    // Sort by Date starting with the newest 
+    // Sort by date starting with the oldest
+    // Show charges since the <25th>
+    // Show charges since the <25th of April>
+    // Show charges since <Monday, the 25th>
+    // Show charges since <Monday>
+    // Show charges from <Vons>
+    // Show charges more than <$100>
+    // Show charges less than <$200>
+    // Show details of <the first one>
+    // Show details of <the first charge>
+
+    if (interp == "chat") {
       recenttransactions_reco_errors = 0;
       $.mobile.changePage($("#chat"));
-    //} else if () {  // TODO:
+
     } else {
       recenttransactions_reco_errors++;
-      NativeBridge.log("recenttransactions_grammarHandler - Bad input:" + interp + ".");
+      NativeBridge.log("recenttransactions_grammarHandler - unhandled:" + interp + ".");
     }
   } else {
     recenttransactions_reco_errors++;
-    NativeBridge.log("recenttransactions_grammarHandler - No input.");
+    NativeBridge.log("recenttransactions_grammarHandler - no reco result.");
   }
 
-  NativeBridge.log("recenttransactions_grammarHandler - recenttransactions_reco_errors: " + 
-    recenttransactions_reco_errors);
+  NativeBridge.log("recenttransactions_grammarHandler - recenttransactions_reco_errors: " + recenttransactions_reco_errors);
   if (recenttransactions_reco_errors > 0) {
     NativeBridge.setGrammar(gResourceRootUrl + "grammars/recenttransactions.grxml", null, recenttransactions_grammarHandler);
     if (recenttransactions_reco_errors == 1) {      
       NativeBridge.playTTS(tts_gender, tts_locale, "Sorry, one more time please.");
     } else {
-      NativeBridge.playTTS(tts_gender, tts_locale, "Sorry, you can say things like Sort by Date  or show charges since April 25th.");
+      NativeBridge.playTTS(tts_gender, tts_locale, "Sorry, you can say things like Sort by Date or show charges since April 25th.");
     }
   }
 }
@@ -160,29 +167,35 @@ function transactiondetail_init() {
 function transactiondetail_grammarHandler(result) {
   if (result != null && result.length > 0) {
     var interp = result[0].interpretation.toLowerCase();
-    NativeBridge.log("transactiondetail_grammarHandler - interpretation: " + interp);
+    NativeBridge.log("transactiondetail_grammarHandler - reco result: " + interp);
+
     if (interp == "dispute this charge") {
       transactiondetail_reco_errors = 0;
       $.mobile.changePage($("#dispute"));
+
     } else if (interp == "next charge") {
       transactiondetail_reco_errors = 0;
       // TODO:
+
     } else if (interp == "previous charge") {
       transactiondetail_reco_errors = 0;
       // TODO:
+
     } else if (interp == "go back") {
       transactiondetail_reco_errors = 0;
       history.back();
-    } else if (interp == "help" || interp == "agent") {
+
+    } else if (interp == "chat") {
       transactiondetail_reco_errors = 0;
       $.mobile.changePage($("#chat"));
+
     } else {
       transactiondetail_reco_errors++;
-      NativeBridge.log("recenttransactions_grammarHandler - Bad input:" + interp + ".");
+      NativeBridge.log("recenttransactions_grammarHandler - unhandled:" + interp + ".");
     }
   } else {
     transactiondetail_reco_errors++;
-    NativeBridge.log("recenttransactions_grammarHandler - No input.");
+    NativeBridge.log("recenttransactions_grammarHandler - no reco result.");
   }
 
   NativeBridge.log("transactiondetail_grammarHandler - transactiondetail_reco_errors: " + transactiondetail_reco_errors);
@@ -198,11 +211,12 @@ function transactiondetail_grammarHandler(result) {
 
 //-----------------------------------------------------------------------------
 
-var survey_reco_errors = 0;
+var dispute_reco_errors = 0;
 
 function dispute_init() {
+  dispute_reco_errors = 0;
   NativeBridge.setMessage(null);
-  NativeBridge.setGrammar(null, null, dispute_grammarHandler);
+  NativeBridge.setGrammar(gResourceRootUrl + "grammars/dispute.grxml", null, dispute_grammarHandler);
 
   var cc_number = getUrlVar("cc_number");
   AccountData.account.initDropdown("last-4-digits-dispute", g_acct_number, cc_number, null);
@@ -211,26 +225,31 @@ function dispute_init() {
 function dispute_grammarHandler(result) {
   if (result != null && result.length > 0) {
     var interp = result[0].interpretation.toLowerCase();
-    NativeBridge.log("dispute_grammarHandler - interpretation: " + interp);
+    NativeBridge.log("dispute_grammarHandler - reco result: " + interp);
+
     if (interp == "back to list") {
       dispute_reco_errors = 0;
       $.mobile.changePage($("#recent-transactions"));
-    } else if (interp == "main menu" || interp == "start over") {        
+
+    } else if (interp == "main menu") {
       dispute_reco_errors = 0;
       $.mobile.changePage($("#main-menu"));
+
     } else if (interp == "continue") {
       dispute_reco_errors = 0;
       $.mobile.changePage($("#survey"));
-    } else if (interp == "help" || interp == "agent") {
+
+    } else if (interp == "chat") {
       dispute_reco_errors = 0;
       $.mobile.changePage($("#chat"));
+
     } else {
       dispute_reco_errors++;
-      NativeBridge.log("recenttransactions_grammarHandler - Bad input:" + interp + ".");
+      NativeBridge.log("recenttransactions_grammarHandler - unhandled:" + interp + ".");
     }
   } else {
     dispute_reco_errors++;
-    NativeBridge.log("recenttransactions_grammarHandler - No input.");
+    NativeBridge.log("recenttransactions_grammarHandler - no reco result.");
   }
 
   NativeBridge.log("dispute_grammarHandler - dispute_reco_errors: " + dispute_reco_errors);
@@ -244,30 +263,37 @@ function dispute_grammarHandler(result) {
 var survey_reco_errors = 0;
 
 function survey_init() {
+  survey_reco_errors = 0;
   NativeBridge.setMessage(null);
-  NativeBridge.setGrammar(null, null, survey_grammarHandler);
+  NativeBridge.setGrammar(gResourceRootUrl + "grammars/survey.grxml", null, survey_grammarHandler);
 }
 
 function survey_grammarHandler(result) {
   if (result != null && result.length > 0) {
     var interp = result[0].interpretation.toLowerCase();
-    NativeBridge.log("survey_grammarHandler - interpretation: " + interp);
-    if (interp == "main menu" || interp == "start over") {        
+    NativeBridge.log("survey_grammarHandler - reco result: " + interp);
+
+    if (interp == "main menu") {
       survey_reco_errors = 0;
       $.mobile.changePage($("#main-menu"));
+
     } else if (interp == "submit") {
       // TODO:
-      survey_reco_errors = 0;
-    } else if (interp == "help" || interp == "agent") {
+      // not implemented
+      NativeBridge.log("survey_grammarHandler - not implemented");
+      survey_reco_errors++;
+
+    } else if (interp == "chat") {
       survey_reco_errors = 0;
       $.mobile.changePage($("#chat"));
+
     } else {
       survey_reco_errors++;
-      NativeBridge.log("recenttransactions_grammarHandler - Bad input:" + interp + ".");
+      NativeBridge.log("recenttransactions_grammarHandler - unhandled:" + interp + ".");
     }
   } else {
     survey_reco_errors++;
-    NativeBridge.log("recenttransactions_grammarHandler - No input.");
+    NativeBridge.log("recenttransactions_grammarHandler - no reco result.");
   }
 
   NativeBridge.log("survey_grammarHandler - survey_reco_errors: " + survey_reco_errors);
@@ -302,6 +328,7 @@ function survey_doStar(vid){
 
 function chat_init() {
   // TODO: How can I help you with <this charge from April 25th at Vons>? 
-  NativeBridge.setMessage("How can I help you with your recent charges?");
+  //NativeBridge.setMessage("How can I help you with your recent charges?"); -- Too long!
+  NativeBridge.setMessage("How can I help you?");
   NativeBridge.setGrammar(null, null, emptyGrammarHandler);
 }
