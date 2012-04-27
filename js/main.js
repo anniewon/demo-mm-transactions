@@ -35,7 +35,7 @@ function emptyGrammarHandler(result) {
 var mainmenu_prompted = false;
 var mainmenu_reco_errors = 0;
 
-function mainmenu_init() {
+function mainmenu_show() {
   mainmenu_reco_errors = 0;
   NativeBridge.setMessage("How can I help you?");
   NativeBridge.setGrammar(gResourceRootUrl + "grammars/mainmenu.grxml", null, mainmenu_grammarHandler);
@@ -91,10 +91,13 @@ function mainmenu_grammarHandler(result) {
 var recenttransactions_prompted = false;
 var recenttransactions_reco_errors = 0;
 
-function recenttransactions_init() {
+function recenttransactions_beforeshow() {
   recenttransactions_reco_errors = 0;
   NativeBridge.setMessage(null);
   NativeBridge.setGrammar(gResourceRootUrl + "grammars/recenttransactions.grxml", null, recenttransactions_grammarHandler);
+}
+
+function recenttransactions_show() {
   if (!recenttransactions_prompted) {
     NativeBridge.playTTS(tts_gender, tts_locale, "Here are your recent transactions. You can say things like Sort by Date or show charges since April 25th.");
     recenttransactions_prompted = true;
@@ -148,7 +151,7 @@ function recenttransactions_grammarHandler(result) {
 var transactiondetail_prompted = false;
 var transactiondetail_reco_errors = 0;
 
-function transactiondetail_init() {
+function transactiondetail_beforeshow() {
   var cc_number = getUrlVar("cc_number");
   var transaction_id = getUrlVar("transaction_id");
   AccountData.account.initDropdown("last-4-digits-detail", g_acct_number, cc_number, null);
@@ -158,6 +161,9 @@ function transactiondetail_init() {
   transactiondetail_reco_errors = 0;
   NativeBridge.setMessage(null);
   NativeBridge.setGrammar(gResourceRootUrl + "grammars/transactiondetail.grxml", null, transactiondetail_grammarHandler);
+}
+
+function transactiondetail_show() {
   if (!transactiondetail_prompted) {
     NativeBridge.playTTS(tts_gender, tts_locale, "Here are the details. You can say Dispute this charge or Go back");
     transactiondetail_prompted = true;
@@ -213,7 +219,7 @@ function transactiondetail_grammarHandler(result) {
 
 var dispute_reco_errors = 0;
 
-function dispute_init() {
+function dispute_beforeshow() {
   dispute_reco_errors = 0;
   NativeBridge.setMessage(null);
   NativeBridge.setGrammar(gResourceRootUrl + "grammars/dispute.grxml", null, dispute_grammarHandler);
@@ -262,7 +268,7 @@ function dispute_grammarHandler(result) {
 
 var survey_reco_errors = 0;
 
-function survey_init() {
+function survey_beforeshow() {
   survey_reco_errors = 0;
   NativeBridge.setMessage(null);
   NativeBridge.setGrammar(gResourceRootUrl + "grammars/survey.grxml", null, survey_grammarHandler);
@@ -326,9 +332,10 @@ function survey_doStar(vid){
 
 //-----------------------------------------------------------------------------
 
-function chat_init() {
+function chat_show() {
   // TODO: How can I help you with <this charge from April 25th at Vons>? 
   //NativeBridge.setMessage("How can I help you with your recent charges?"); -- Too long!
   NativeBridge.setMessage("How can I help you?");
   NativeBridge.setGrammar(null, null, emptyGrammarHandler);
 }
+

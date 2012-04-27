@@ -42,7 +42,7 @@
         dropdown.change();
     });
 */
-    $('#main-menu').live('pagebeforeshow', mainmenu_init);
+    $('#main-menu').live('pageshow', mainmenu_show);
   </script>
 
   <!-- Funky-fresh fixed header -->
@@ -105,7 +105,8 @@
         // Initiate onchange event
         dropdown.change();
     });
-    $('#recent-transactions').live('pagebeforeshow', recenttransactions_init);
+    $('#recent-transactions').live('pagebeforeshow', recenttransactions_beforeshow);
+    $('#recent-transactions').live('pageshow', recenttransactions_show);
   </script>
 
   <!-- Funky-fresh fixed header -->
@@ -137,7 +138,8 @@
  
 <div id="transaction-detail" data-role="page">
   <script type="text/javascript">
-    $('#transaction-detail').live('pagebeforeshow', transactiondetail_init);
+    $('#transaction-detail').live('pagebeforeshow', transactiondetail_beforeshow);
+    $('#transaction-detail').live('pageshow', transactiondetail_show);
   </script>
 
   <!-- Funky-fresh fixed header -->
@@ -200,7 +202,7 @@
 
 <div id="dispute" data-role="page">
   <script type="text/javascript">
-    $('#dispute').live('pagebeforeshow', dispute_init);
+    $('#dispute').live('pagebeforeshow', dispute_beforeshow);
   </script>
 
   <!-- Funky-fresh fixed header -->
@@ -244,7 +246,7 @@
 
 <div id="survey" data-role="page">
   <script type="text/javascript">
-    $('#survey').live('pagebeforeshow', survey_init);
+    $('#survey').live('pagebeforeshow', survey_beforeshow);
   </script>
 
   <!-- Funky-fresh fixed header -->
@@ -289,7 +291,7 @@
 
 <div id="chat" data-role="page">
   <script type="text/javascript">
-    $('#chat').live('pagebeforeshow', chat_init);
+    $('#chat').live('pageshow', chat_show);
   </script>
 
   <!-- Funky-fresh fixed header -->
