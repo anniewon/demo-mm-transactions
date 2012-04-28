@@ -22,7 +22,7 @@
         <item>my</item>
       </one-of>
     </item>
-    <item repeat="0-1">charge</item>
+    <item repeat="0-1"><ruleref uri="#charge"/></item>    
   </rule>
 
   <rule id="next" scope="private">
@@ -30,7 +30,7 @@
     <item repeat="0-1">
       <one-of>
         <item>one</item>
-        <item>charge</item>
+        <ruleref uri="#charge"/>
       </one-of>
     </item>
   </rule>
@@ -40,9 +40,16 @@
     <item repeat="0-1">
       <one-of>
         <item>one</item>
-        <item>charge</item>
+        <ruleref uri="#charge"/>
       </one-of>
     </item>
+  </rule>
+
+  <rule id="charge">
+    <one-of>
+      <item>charge</item>
+      <item>transaction</item>
+    </one-of>
   </rule>
 
   <rule id="chat" scope="private">

@@ -5,32 +5,35 @@
 
   <tag>
     var now = new Date();
+    var currDay = now.getDay();
     var currMonth = now.getMonth();
     var currDate = now.getDate();
     var currYear = now.getYear();
 
-    function changeDay(date, day) {
-      date.setDate(day);
+    function changeDay(day) {
+      now.setDate(day);
       if (currDate &lt; day) {
         var prevMonth = currMonth - 1;
         if (prevMonth == -1) {
           prevMonth = 12;
-          date.setYear(currYear - 1);
+          now.setYear(currYear - 1);
         }  
-        date.setMonth(prevMonth);
+        now.setMonth(prevMonth);
       }
     }
 
-    function changeMonthAndDay(date, month, day) {
-      date.setDate(day);
-      date.setMonth(month);
+    function changeMonthAndDay(month, day) {
+      now.setDate(day);
+      now.setMonth(month);
       if (currMonth &lt; month || (currMonth == month &amp;&amp; currDate &lt; day)) {
-        date.setYear(currYear - 1);
+        now.setYear(currYear - 1);
       }
     }
 
-    function changeDayOfWeek(date, dayofweek) {
-      date.setDate(date.getDate() - date.getDay() + dayofweek - ((date.getDay() &lt; dayofweek)?7:0)); 
+    function changeDayOfWeek(dayofweek, lastWeek) {
+      now.setDate(currDate - currDay + dayofweek - 
+        ((currDay &lt; dayofweek)?7:0) - 
+        (lastWeek? 7 : 0)); 
     }
   </tag>
 
@@ -41,7 +44,7 @@
       <item><ruleref uri="#sinceDate"/><tag>out.action = "filter"; out.field = "date"; out.comparison = ">"; out.value = rules.sinceDate.getTime();</tag></item>
       <item><ruleref uri="#moreThanAmount"/><tag>out.action = "filter"; out.field = "amount"; out.comparison = ">"; out.value = rules.moreThanAmount;</tag></item>
       <item><ruleref uri="#lessThanAmount"/><tag>out.action = "filter"; out.field = "amount"; out.comparison = "&lt;"; out.value = rules.lessThanAmount;</tag></item>
-      <item>show charges from <ruleref uri="#merchant"/><tag>out.action = "filter"; out.field = "merchant"; out.comparison = "="; out.value = rules.merchant;</tag></item>
+      <item>show <ruleref uri="#charges"/> from <ruleref uri="#merchant"/><tag>out.action = "filter"; out.field = "merchant"; out.comparison = "="; out.value = rules.merchant;</tag></item>
       <item><ruleref uri="#detailByIdx"/><tag>out.action = "detail"; out.idx = rules.detailByIdx;</tag></item>
       <item><ruleref uri="#chat"/><tag>out.action = "chat"</tag></item>
     </one-of>
@@ -53,34 +56,50 @@
   </rule>
 
   <rule id="sinceDate">
-    <one-of>
-      <item>Show charges since <ruleref uri="#dateFlavor"/><tag>out = rules.dateFlavor;</tag></item>
-      <item>Recent charges since <ruleref uri="#dateFlavor"/><tag>out = rules.dateFlavor;</tag></item>
-    </one-of>
+    <item repeat="0-1">show</item>
+    <item repeat="0-1">recent</item>
+    <item><ruleref uri="#charges"/> since <ruleref uri="#dateFlavor"/><tag>out = rules.dateFlavor;</tag></item>
   </rule>
 
   <rule id="moreThanAmount">
     <!-- TODO: define #number -->
-    <item>show charges more than <ruleref uri="#digit"/><tag>out = rules.digit;</tag></item>
+    <item>show <ruleref uri="#charges"/> more than <ruleref uri="#digit"/><tag>out = rules.digit;</tag></item>
     <item repeat="0-1">dollars</item>
   </rule>
 
   <rule id="lessThanAmount">
     <!-- TODO: define #number -->
-    <item>show charges less than <ruleref uri="#digit"/><tag>out = rules.digit;</tag></item>
+    <item>show <ruleref uri="#charges"/> less than <ruleref uri="#digit"/><tag>out = rules.digit;</tag></item>
     <item repeat="0-1">dollars</item>
   </rule>
 
   <rule id="detailByIdx">
     <item>show</item>
     <item repeat="0-1">details of</item>
-    <item>the <ruleref uri="#day"/><tag>out = rules.day - 1;</tag></item> <!-- use #day for now, fix this later -->
+    <one-of>
+      <item>the <ruleref uri="#day"/><tag>out = rules.day - 1;</tag></item> <!-- use #day for now, fix this later -->
+      <item>the last<tag>out = - 1;</tag></item>
+    </one-of>
     <item repeat="0-1">
       <one-of>
         <item>one</item>
-        <item>charge</item>
+        <item><ruleref uri="#charge"/></item>
       </one-of>
     </item>
+  </rule>
+
+  <rule id="charge">
+    <one-of>
+      <item>charge</item>
+      <item>transaction</item>
+    </one-of>
+  </rule>
+
+  <rule id="charges">
+    <one-of>
+      <item>charges</item>
+      <item>transactions</item>
+    </one-of>
   </rule>
 
   <rule id="merchant">
@@ -120,10 +139,13 @@
 
   <rule id="dateFlavor">
     <one-of>
-      <item><ruleref uri="#dayofweek"/><tag>out = now; changeDayOfWeek(out, rules.dayofweek);</tag></item>
-      <item>last <ruleref uri="#dayofweek"/><tag>out = now;</tag></item> <!-- TODO: -->
-      <item><ruleref uri="#dayFlavor"/><tag>out = now; changeDay(out, rules.dayFlavor);</tag></item>
-      <item><ruleref uri="#dayAndMonthFlavor"/><tag>out = now; changeMonthAndDay(out, rules.dayAndMonthFlavor.month, rules.dayAndMonthFlavor.day);</tag></item>
+      <item>
+        <item repeat="0-1">this</item>
+        <item><ruleref uri="#dayofweek"/><tag>changeDayOfWeek(rules.dayofweek, false); out = now;</tag></item>
+      </item>
+      <item>last <ruleref uri="#dayofweek"/><tag>changeDayOfWeek(rules.dayofweek, true);  out = now;</tag></item>
+      <item><ruleref uri="#dayFlavor"/><tag>changeDay(rules.dayFlavor);  out = now;</tag></item>
+      <item><ruleref uri="#dayAndMonthFlavor"/><tag>changeMonthAndDay(rules.dayAndMonthFlavor.month, rules.dayAndMonthFlavor.day);  out = now;</tag></item>
     </one-of>
   </rule>
 
