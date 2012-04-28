@@ -5,12 +5,44 @@
 
   <rule id="rootrule" scope="public">
     <one-of>
-      <item>dispute this charge</item>
-      <item>next charge</item>
-      <item>previous charge</item>
+      <item><ruleref uri="#dispute"/><tag>out = "dispute"</tag></item>
+      <item><ruleref uri="#next"/><tag>out = "next"</tag></item>
+      <item><ruleref uri="#previous"/><tag>out = "previous"</tag></item>
       <item>go back</item>
       <item><ruleref uri="#chat"/><tag>out = "chat"</tag></item>
     </one-of>
+  </rule>
+
+  <rule id="dispute" scope="private">
+    <item>dispute</item>
+    <item repeat="0-1">
+      <one-of>
+        <item>this</item>
+        <item>the</item>
+        <item>my</item>
+      </one-of>
+    </item>
+    <item repeat="0-1">charge</item>
+  </rule>
+
+  <rule id="next" scope="private">
+    <item>next</item>
+    <item repeat="0-1">
+      <one-of>
+        <item>one</item>
+        <item>charge</item>
+      </one-of>
+    </item>
+  </rule>
+
+  <rule id="previous" scope="private">
+    <item>previous</item>
+    <item repeat="0-1">
+      <one-of>
+        <item>one</item>
+        <item>charge</item>
+      </one-of>
+    </item>
   </rule>
 
   <rule id="chat" scope="private">

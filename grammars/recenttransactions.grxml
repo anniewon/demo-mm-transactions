@@ -3,16 +3,223 @@
 <grammar xmlns="http://www.w3.org/2001/06/grammar" version="1.0"
   xml:lang="en-US" root="rootrule" tag-format="semantics/1.0">
 
+  <tag>
+    var now = new Date();
+    var currMonth = now.getMonth();
+    var currDate = now.getDate();
+    var currYear = now.getYear();
+
+    function changeDay(date, day) {
+      date.setDate(day);
+      if (currDate &lt; day) {
+        var prevMonth = currMonth - 1;
+        if (prevMonth == -1) {
+          prevMonth = 12;
+          date.setYear(currYear - 1);
+        }  
+        date.setMonth(prevMonth);
+      }
+    }
+
+    function changeMonthAndDay(date, month, day) {
+      date.setDate(day);
+      date.setMonth(month);
+      if (currMonth &lt; month || (currMonth == month &amp;&amp; currDate &lt; day)) {
+        date.setYear(currYear - 1);
+      }
+    }
+
+    function changeDayOfWeek(date, dayofweek) {
+      date.setDate(date.getDate() - date.getDay() + dayofweek - ((date.getDay() &lt; dayofweek)?7:0)); 
+    }
+  </tag>
+
   <rule id="rootrule" scope="public">
     <one-of>
-      <item><ruleref uri="#chat"/><tag>out = "chat"</tag></item>
+      <item><ruleref uri="#sortByNewest"/><tag>out.action = "sort"; out.field = "date"; out.order = "descending";</tag></item>
+      <item>sort by date starting with the oldest<tag>out.action = "sort"; out.field = "date"; out.order = "ascending";</tag></item>
+      <item><ruleref uri="#sinceDate"/><tag>out.action = "filter"; out.field = "date"; out.comparison = ">"; out.value = rules.sinceDate.getTime();</tag></item>
+      <item><ruleref uri="#moreThanAmount"/><tag>out.action = "filter"; out.field = "amount"; out.comparison = ">"; out.value = rules.moreThanAmount;</tag></item>
+      <item><ruleref uri="#lessThanAmount"/><tag>out.action = "filter"; out.field = "amount"; out.comparison = "&lt;"; out.value = rules.lessThanAmount;</tag></item>
+      <item>show charges from <ruleref uri="#merchant"/><tag>out.action = "filter"; out.field = "merchant"; out.comparison = "="; out.value = rules.merchant;</tag></item>
+      <item><ruleref uri="#detailByIdx"/><tag>out.action = "detail"; out.idx = rules.detailByIdx;</tag></item>
+      <item><ruleref uri="#chat"/><tag>out.action = "chat"</tag></item>
     </one-of>
   </rule>
 
-  <rule id="chat" scope="private">
+  <rule id="sortByNewest">
+    <item>sort by date</item>
+    <item repeat="0-1">starting with the newest</item>
+  </rule>
+
+  <rule id="sinceDate">
+    <one-of>
+      <item>Show charges since <ruleref uri="#dateFlavor"/><tag>out = rules.dateFlavor;</tag></item>
+      <item>Recent charges since <ruleref uri="#dateFlavor"/><tag>out = rules.dateFlavor;</tag></item>
+    </one-of>
+  </rule>
+
+  <rule id="moreThanAmount">
+    <!-- TODO: define #number -->
+    <item>show charges more than <ruleref uri="#digit"/><tag>out = rules.digit;</tag></item>
+    <item repeat="0-1">dollars</item>
+  </rule>
+
+  <rule id="lessThanAmount">
+    <!-- TODO: define #number -->
+    <item>show charges less than <ruleref uri="#digit"/><tag>out = rules.digit;</tag></item>
+    <item repeat="0-1">dollars</item>
+  </rule>
+
+  <rule id="detailByIdx">
+    <item>show</item>
+    <item repeat="0-1">details of</item>
+    <item>the <ruleref uri="#day"/><tag>out = rules.day - 1;</tag></item> <!-- use #day for now, fix this later -->
+    <item repeat="0-1">
+      <one-of>
+        <item>one</item>
+        <item>charge</item>
+      </one-of>
+    </item>
+  </rule>
+
+  <rule id="merchant">
+    <!-- TODO: make this dynamic -->
+    <one-of>
+      <item>Starbucks</item>
+      <item>Quiznos</item>
+      <item>Safeway</item>
+      <item>Walgreens</item>
+      <item>Chevron</item>
+      <item>Lou Malnati's</item>
+      <item>Hotel Burnham</item>
+      <item>Elmwood Cafe</item>
+      <item>C &amp; C Cleaners</item>
+      <item>Amazon.com</item>
+      <item>San Francisco Museum of Modern Art</item>
+      <item>Le Charm French Bistro</item>
+      <item>Netflix</item>
+      <item>Alameda 76</item>
+      <item>Otaez Mexican Restaurant</item>
+      <item>United Airlines</item>
+      <item>Macys</item>
+      <item>FasTrak</item>
+      <item>Comcast</item>
+      <item>Verizon Wireless</item>
+      <item>esurance</item>
+      <item>Alameda Auto Body</item>
+    </one-of>
+  </rule>
+
+  <rule id="chat">
     <one-of>
       <item>help</item>
       <item>agent</item>
+    </one-of>
+  </rule>
+
+  <rule id="dateFlavor">
+    <one-of>
+      <item><ruleref uri="#dayofweek"/><tag>out = now; changeDayOfWeek(out, rules.dayofweek);</tag></item>
+      <item>last <ruleref uri="#dayofweek"/><tag>out = now;</tag></item> <!-- TODO: -->
+      <item><ruleref uri="#dayFlavor"/><tag>out = now; changeDay(out, rules.dayFlavor);</tag></item>
+      <item><ruleref uri="#dayAndMonthFlavor"/><tag>out = now; changeMonthAndDay(out, rules.dayAndMonthFlavor.month, rules.dayAndMonthFlavor.day);</tag></item>
+    </one-of>
+  </rule>
+
+  <rule id="dayFlavor">
+    <one-of>
+      <item>the <ruleref uri="#day"/><tag>out = rules.day;</tag></item>
+      <item><ruleref uri="#dayofweek"/> the <ruleref uri="#day"/><tag>out = rules.day;</tag></item>
+    </one-of>
+  </rule>
+
+  <rule id="dayAndMonthFlavor">
+    <one-of>
+      <item>the <ruleref uri="#day"/> of <ruleref uri="#month"/><tag>out.month = rules.month; out.day = rules.day;</tag></item>
+      <item><ruleref uri="#month"/> <ruleref uri="#day"/><tag>out.month = rules.month; out.day = rules.day;</tag></item>
+      <item><ruleref uri="#dayofweek"/> <ruleref uri="#month"/> <ruleref uri="#day"/><tag>out.month = rules.month; out.day = rules.day;</tag></item>
+      <item><ruleref uri="#dayofweek"/> the <ruleref uri="#day"/> of <ruleref uri="#month"/><tag>out.month = rules.month; out.day = rules.day;</tag></item>
+    </one-of>
+  </rule>
+
+  <rule id="day">
+    <one-of>
+      <item>first<tag>out = 1;</tag></item>
+      <item>second<tag>out = 2;</tag></item>
+      <item>third<tag>out = 3;</tag></item>
+      <item>fourth<tag>out = 4;</tag></item>
+      <item>fifth<tag>out = 5;</tag></item>
+      <item>sixth<tag>out = 6;</tag></item>
+      <item>seventh<tag>out = 7;</tag></item>
+      <item>eighth<tag>out = 8;</tag></item>
+      <item>ninth<tag>out = 9;</tag></item>
+      <item>tenth<tag>out = 10;</tag></item>
+      <item>eleventh<tag>out = 11;</tag></item>
+      <item>twelfth<tag>out = 12;</tag></item>
+      <item>thirteenth<tag>out = 13;</tag></item>
+      <item>fourteenth<tag>out = 14;</tag></item>
+      <item>fifteenth<tag>out = 15;</tag></item>
+      <item>sixteenth<tag>out = 16;</tag></item>
+      <item>seventeenth<tag>out = 17;</tag></item>
+      <item>eighteenth<tag>out = 18;</tag></item>
+      <item>nineteenth<tag>out = 19;</tag></item>
+      <item>twentieth<tag>out = 20;</tag></item>
+      <item>twenty-first<tag>out = 21;</tag></item>
+      <item>twenty-second<tag>out = 22;</tag></item>
+      <item>twenty-third<tag>out = 23;</tag></item>
+      <item>twenty-fourth<tag>out = 24;</tag></item>
+      <item>twenty-fifth<tag>out = 25;</tag></item>
+      <item>twenty-sixth<tag>out = 26;</tag></item>
+      <item>twenty-seventh<tag>out = 27;</tag></item>
+      <item>twenty-eighth<tag>out = 28;</tag></item>
+      <item>twenty-ninth<tag>out = 29;</tag></item>
+      <item>thirtieth<tag>out = 30;</tag></item>
+      <item>thirty-first<tag>out = 31;</tag></item>
+    </one-of>
+  </rule>
+
+  <rule id="month">
+    <one-of>
+      <item>January<tag>out = 0;</tag></item>
+      <item>February<tag>out = 1;</tag></item>
+      <item>March<tag>out = 2;</tag></item>
+      <item>April<tag>out = 3;</tag></item>
+      <item>May<tag>out = 4;</tag></item>
+      <item>June<tag>out = 5;</tag></item>
+      <item>July<tag>out = 6;</tag></item>
+      <item>August<tag>out = 7;</tag></item>
+      <item>September<tag>out = 8;</tag></item>
+      <item>October<tag>out = 9;</tag></item>
+      <item>November<tag>out = 10;</tag></item>
+      <item>December<tag>out = 11;</tag></item>
+    </one-of>
+  </rule>
+
+  <rule id="dayofweek">
+    <one-of>
+      <item>Sunday<tag>out = 0;</tag></item>
+      <item>Monday<tag>out = 1;</tag></item>
+      <item>Tuesday<tag>out = 2;</tag></item>
+      <item>Wednesday<tag>out = 3;</tag></item>
+      <item>Thursday<tag>out = 4;</tag></item>
+      <item>Friday<tag>out = 5;</tag></item>
+      <item>Saturday<tag>out = 6;</tag></item>
+    </one-of>
+  </rule>
+
+  <rule id="digit">
+    <one-of>
+      <item>0</item>
+      <item>1</item>
+      <item>2</item>
+      <item>3</item>
+      <item>4</item>
+      <item>5</item>
+      <item>6</item>
+      <item>7</item>
+      <item>8</item>
+      <item>9</item>
     </one-of>
   </rule>
 </grammar>
