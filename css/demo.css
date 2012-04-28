@@ -25,6 +25,12 @@
     height: 42px;
 }
 
+.header-button {
+    width: 50px;
+    height: 28px;
+    padding-top: 4px;
+}
+
 /* Buttons */
 
 .ui-icon-cross {
