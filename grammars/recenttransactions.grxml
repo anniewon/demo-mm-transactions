@@ -87,7 +87,6 @@
         <item repeat="0-1">details of</item>
         <one-of>
           <item>the <ruleref uri="#ordering"/><tag>out = rules.ordering - 1;</tag></item>
-          <item>the last<tag>out = - 1;</tag></item>
         </one-of>
         <item repeat="0-1">
           <one-of>
