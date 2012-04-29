@@ -1,3 +1,7 @@
+
+var gDynamicGrammarRootUrl = "../../perl/transdemo/grammars/dynamicgram.pl";
+var gMerchantDelim = "<DELIM>";
+
 //-----------------------------------------------------------------------------
 
 function getUrlVar(name) {
@@ -10,6 +14,34 @@ function getUrlVar(name) {
     }
   }
   return null;
+}
+
+function merchants() {
+  //TODO:
+  var merchants =
+    "Starbucks" + gMerchantDelim +
+    "Quiznos" + gMerchantDelim +
+    "Safeway" + gMerchantDelim +
+    "Walgreens" + gMerchantDelim +
+    "Chevron" + gMerchantDelim +
+    "Lou Malnati's" + gMerchantDelim +
+    "Hotel Burnham" + gMerchantDelim +
+    "Elmwood Cafe" + gMerchantDelim +
+    "C &amp; C Cleaners" + gMerchantDelim +
+    "Amazon.com" + gMerchantDelim +
+    "San Francisco Museum of Modern Art" + gMerchantDelim +
+    "Le Charm French Bistro" + gMerchantDelim +
+    "Netflix" + gMerchantDelim +
+    "Alameda 76" + gMerchantDelim +
+    "Otaez Mexican Restaurant" + gMerchantDelim +
+    "United Airlines" + gMerchantDelim +
+    "Macys" + gMerchantDelim +
+    "FasTrak" + gMerchantDelim +
+    "Comcast" + gMerchantDelim +
+    "Verizon Wireless" + gMerchantDelim +
+    "esurance" + gMerchantDelim +
+    "Alameda Auto Body";
+  return encodeURIComponent(merchants);
 }
 
 //-----------------------------------------------------------------------------
@@ -29,10 +61,14 @@ function emptyGrammarHandler(result) {
 var mainmenu_prompted = false;
 var mainmenu_reco_errors = 0;
 
+function mainmenu_grammar() {
+  return gDynamicGrammarRootUrl + "?type=mainmenu&merchants=" + merchants();
+}
+
 function mainmenu_show() {
   mainmenu_reco_errors = 0;
   NativeBridge.setMessage("How can I help you?");
-  NativeBridge.setGrammar("grammars/mainmenu.grxml", null, mainmenu_grammarHandler);
+  NativeBridge.setGrammar(mainmenu_grammar(), null, mainmenu_grammarHandler);
   if (!mainmenu_prompted) {
     NativeBridge.playAudio("audio/RT_Menu_01.wav");
     mainmenu_prompted = true;
@@ -41,32 +77,44 @@ function mainmenu_show() {
 
 function mainmenu_grammarHandler(result) {
   if (result != null && result.length > 0) {
-    var interp = result[0].interpretation.toLowerCase();
-    NativeBridge.log("mainmenu_grammarHandler - reco result: " + interp);
+    var interp = result[0].interpretation;
+    var action = interp.action.toLowerCase();
+    NativeBridge.log("mainmenu_grammarHandler - reco result: " + action);
 
     // TODO:
-    // Recent charges since <the 24th of April>
-    // Recent charges from <Vons>
-
-    if (interp == "recent transactions") {        
+    if (action == "recent transactions") {        
       mainmenu_reco_errors = 0;
       $.mobile.changePage($("#recent-transactions"));
 
-    } else if (interp == "make a payment" ||
-               interp == "find an a t m" ||
-               interp == "rewards points" ||
-               interp == "contact us" ||
-               interp == "report missing") {
+    } else if (action == "filter") {
+      NativeBridge.log("mainmenu_grammarHandler - filter" +
+                       ", field: " + interp.field + 
+                       ", comparison: " + interp.comparison +
+                       ", value: " + interp.value);
+
+      if (interp.field.toLowerCase() == "date") {
+        var date = new Date(parseFloat(interp.value));
+        NativeBridge.log("mainmenu_grammarHandler - date: " + date.toLocaleString());
+      }
+
+      mainmenu_reco_errors = 0;
+      NativeBridge.setGrammar(mainmenu_grammar(), null, mainmenu_grammarHandler);
+
+    } else if (action == "payment" ||
+               action == "atm" ||
+               action == "rewards" ||
+               action == "contact" ||
+               action == "report missing") {
       NativeBridge.log("mainmenu_grammarHandler - not implemented");
       mainmenu_reco_errors++;
 
-    } else if (interp == "chat") {
+    } else if (action == "chat") {
       mainmenu_reco_errors = 0;
       $.mobile.changePage($("#chat"));
 
     } else {
       mainmenu_reco_errors++;
-      NativeBridge.log("mainmenu_grammarHandler - unhandled:" + interp + ".");
+      NativeBridge.log("mainmenu_grammarHandler - unhandled:" + action + ".");
     }
   } else {
     mainmenu_reco_errors++;
@@ -75,7 +123,7 @@ function mainmenu_grammarHandler(result) {
 
   NativeBridge.log("mainmenu_grammarHandler - mainmenu_reco_errors: " + mainmenu_reco_errors);
   if (mainmenu_reco_errors > 0) {
-    NativeBridge.setGrammar("grammars/mainmenu.grxml", null, mainmenu_grammarHandler);
+    NativeBridge.setGrammar(mainmenu_grammar(), null, mainmenu_grammarHandler);
   }
 }
 
@@ -84,10 +132,14 @@ function mainmenu_grammarHandler(result) {
 var recenttransactions_prompted = false;
 var recenttransactions_reco_errors = 0;
 
+function recenttransactions_grammar() {
+  return gDynamicGrammarRootUrl + "?type=recenttransactions&merchants=" + merchants();
+}
+
 function recenttransactions_beforeshow() {
   recenttransactions_reco_errors = 0;
   NativeBridge.setMessage(null);
-  NativeBridge.setGrammar("grammars/recenttransactions.grxml", null, recenttransactions_grammarHandler);
+  NativeBridge.setGrammar(recenttransactions_grammar(), null, recenttransactions_grammarHandler);
 }
 
 function recenttransactions_show() {
@@ -111,7 +163,7 @@ function recenttransactions_grammarHandler(result) {
                        ", order: " + interp.order);
       
       recenttransactions_reco_errors = 0;
-      NativeBridge.setGrammar("grammars/recenttransactions.grxml", null, recenttransactions_grammarHandler);
+      NativeBridge.setGrammar(recenttransactions_grammar(), null, recenttransactions_grammarHandler);
 
     } else if (action == "filter") {
       NativeBridge.log("recenttransactions_grammarHandler - filter" +
@@ -125,14 +177,14 @@ function recenttransactions_grammarHandler(result) {
       }
 
       recenttransactions_reco_errors = 0;
-      NativeBridge.setGrammar("grammars/recenttransactions.grxml", null, recenttransactions_grammarHandler);
+      NativeBridge.setGrammar(recenttransactions_grammar(), null, recenttransactions_grammarHandler);
 
     } else if (action == "detail") {
       NativeBridge.log("recenttransactions_grammarHandler - detail" +
                        ", idx: " + interp.idx);
 
       recenttransactions_reco_errors = 0;
-      NativeBridge.setGrammar("grammars/recenttransactions.grxml", null, recenttransactions_grammarHandler);
+      NativeBridge.setGrammar(recenttransactions_grammar(), null, recenttransactions_grammarHandler);
 
     } else if (action == "chat") {
       recenttransactions_reco_errors = 0;
@@ -149,7 +201,7 @@ function recenttransactions_grammarHandler(result) {
 
   NativeBridge.log("recenttransactions_grammarHandler - recenttransactions_reco_errors: " + recenttransactions_reco_errors);
   if (recenttransactions_reco_errors > 0) {
-    NativeBridge.setGrammar("grammars/recenttransactions.grxml", null, recenttransactions_grammarHandler);
+    NativeBridge.setGrammar(recenttransactions_grammar(), null, recenttransactions_grammarHandler);
     if (recenttransactions_reco_errors == 1) {
       NativeBridge.playAudio("audio/RT_RecentTransactions_02.wav");
     } else {
