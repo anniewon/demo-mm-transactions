@@ -61,30 +61,49 @@
   </rule>
 
   <rule id="moreThanAmount">
-    <!-- TODO: define #number -->
-    <item>show <ruleref uri="#charges"/> more than <ruleref uri="#digit"/><tag>out = rules.digit;</tag></item>
-    <item repeat="0-1">dollars</item>
+    <item>
+      show 
+      <ruleref uri="#charges"/> 
+      <one-of>
+        <item>more</item>
+        <item>greater</item>
+      </one-of> 
+      than <ruleref uri="#number"/><tag>out = rules.number;</tag>
+      <item repeat="0-1">dollars</item>
+    </item>
   </rule>
 
   <rule id="lessThanAmount">
-    <!-- TODO: define #number -->
-    <item>show <ruleref uri="#charges"/> less than <ruleref uri="#digit"/><tag>out = rules.digit;</tag></item>
-    <item repeat="0-1">dollars</item>
+    <item>
+      show <ruleref uri="#charges"/> less than <ruleref uri="#number"/><tag>out = rules.number;</tag>
+      <item repeat="0-1">dollars</item>
+    </item>
   </rule>
 
   <rule id="detailByIdx">
-    <item>show</item>
-    <item repeat="0-1">details of</item>
     <one-of>
-      <item>the <ruleref uri="#day"/><tag>out = rules.day - 1;</tag></item> <!-- use #day for now, fix this later -->
-      <item>the last<tag>out = - 1;</tag></item>
+      <!-- use #day for now, TODO: fix this later -->
+      <item>
+        show
+        <item repeat="0-1">details of</item>
+        <one-of>
+          <item>the <ruleref uri="#day"/><tag>out = rules.day - 1;</tag></item>
+          <item>the last<tag>out = - 1;</tag></item>
+        </one-of>
+        <item repeat="0-1">
+          <one-of>
+            <item>one</item>
+            <item><ruleref uri="#charge"/></item>
+          </one-of>
+        </item>
+      </item>
+      <item>
+        show
+        <item repeat="0-1">details of</item>
+        <ruleref uri="#charge"/>
+        <ruleref uri="#number"/><tag>out = rules.number - 1;</tag>
+      </item>
     </one-of>
-    <item repeat="0-1">
-      <one-of>
-        <item>one</item>
-        <item><ruleref uri="#charge"/></item>
-      </one-of>
-    </item>
   </rule>
 
   <rule id="charge">
@@ -226,18 +245,80 @@
     </one-of>
   </rule>
 
-  <rule id="digit">
+  <rule id="number">
+    <tag>out = 0;</tag>
     <one-of>
-      <item>0</item>
-      <item>1</item>
-      <item>2</item>
-      <item>3</item>
-      <item>4</item>
-      <item>5</item>
-      <item>6</item>
-      <item>7</item>
-      <item>8</item>
-      <item>9</item>
+      <item><ruleref uri="#digit"/><tag>out = rules.latest();</tag></item>  
+      <item><ruleref uri="#val10_19"/><tag>out = rules.latest();</tag></item>
+      <item>
+        <ruleref uri="#val10s"/><tag>out = rules.latest();</tag>
+        <item repeat="0-1"><ruleref uri="#digit"/><tag> out += rules.latest();</tag></item>
+      </item>        
+      <item>
+        <ruleref uri="#val100s"/><tag>out = rules.latest();</tag>
+        <item repeat="0-1">and</item>
+        <item repeat="0-1"><ruleref uri="#val10s"/><tag>out += rules.latest();</tag></item>
+        <item repeat="0-1"><ruleref uri="#digit"/><tag> out += rules.latest();</tag></item>
+      </item>
     </one-of>
   </rule>
+
+  <rule id="digit">
+    <one-of>
+      <item>0<tag>out=0;</tag></item>
+      <item>1<tag>out=1;</tag></item>
+      <item>2<tag>out=2;</tag></item>
+      <item>3<tag>out=3;</tag></item>
+      <item>4<tag>out=4;</tag></item>
+      <item>5<tag>out=5;</tag></item>
+      <item>6<tag>out=6;</tag></item>
+      <item>7<tag>out=7;</tag></item>
+      <item>8<tag>out=8;</tag></item>
+      <item>9<tag>out=9;</tag></item>
+    </one-of>
+  </rule>
+  
+  <rule id="val10_19">
+    <one-of>
+      <item>ten<tag>out=10;</tag></item>
+      <item>eleven<tag>out=11;</tag></item>
+      <item>twelve<tag>out=12;</tag></item>
+      <item>thirteen<tag>out=13;</tag></item>
+      <item>fourteen<tag>out=14;</tag></item>
+      <item>fifteen<tag>out=15;</tag></item>
+      <item>sixteen<tag>out=16;</tag></item>
+      <item>seventeen<tag>out=17;</tag></item>
+      <item>eighteen<tag>out=18;</tag></item>
+      <item>nineteen<tag>out=19;</tag></item>
+    </one-of>
+  </rule>
+
+  <rule id="val10s">
+    <one-of>
+      <item>twenty<tag>out=20;</tag></item>
+      <item>thirty<tag>out=30;</tag></item>
+      <item>forty<tag>out=40;</tag></item>
+      <item>fifty<tag>out=50;</tag></item>
+      <item>sixty<tag>out=60;</tag></item>
+      <item>seventy<tag>out=70;</tag></item>
+      <item>eighty<tag>out=80;</tag></item>
+      <item>ninety<tag>out=90;</tag></item>
+    </one-of>
+  </rule>
+
+  <rule id="val100s">
+    <one-of>
+      <item>a hundred<tag>out=100;</tag></item>
+      <item>one hundred<tag>out=100;</tag></item>
+      <item>two hundred<tag>out=200;</tag></item>
+      <item>three hundred<tag>out=300;</tag></item>
+      <item>four hundred<tag>out=400;</tag></item>
+      <item>five hundred<tag>out=500;</tag></item>
+      <item>six hundred<tag>out=600;</tag></item>
+      <item>seven hundred<tag>out=700;</tag></item>
+      <item>eight hundred<tag>out=800;</tag></item>
+      <item>nine hundred<tag>out=900;</tag></item>
+    </one-of>
+  </rule>
+
 </grammar>
