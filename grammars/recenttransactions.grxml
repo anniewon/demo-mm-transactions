@@ -32,8 +32,7 @@
 
     function changeDayOfWeek(dayofweek, lastWeek) {
       now.setDate(currDate - currDay + dayofweek - 
-        ((currDay &lt; dayofweek)?7:0) - 
-        (lastWeek? 7 : 0)); 
+        ((currDay &lt; dayofweek || lastWeek)?7:0));
     }
   </tag>
 
@@ -139,10 +138,7 @@
 
   <rule id="dateFlavor">
     <one-of>
-      <item>
-        <item repeat="0-1">this</item>
-        <item><ruleref uri="#dayofweek"/><tag>changeDayOfWeek(rules.dayofweek, false); out = now;</tag></item>
-      </item>
+      <item><ruleref uri="#dayofweek"/><tag>changeDayOfWeek(rules.dayofweek, false); out = now;</tag></item>
       <item>last <ruleref uri="#dayofweek"/><tag>changeDayOfWeek(rules.dayofweek, true);  out = now;</tag></item>
       <item><ruleref uri="#dayFlavor"/><tag>changeDay(rules.dayFlavor);  out = now;</tag></item>
       <item><ruleref uri="#dayAndMonthFlavor"/><tag>changeMonthAndDay(rules.dayAndMonthFlavor.month, rules.dayAndMonthFlavor.day);  out = now;</tag></item>
