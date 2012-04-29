@@ -40,10 +40,17 @@
     <one-of>
       <item><ruleref uri="#sortByNewest"/><tag>out.action = "sort"; out.field = "date"; out.order = "descending";</tag></item>
       <item>sort by date starting with the oldest<tag>out.action = "sort"; out.field = "date"; out.order = "ascending";</tag></item>
-      <item><ruleref uri="#sinceDate"/><tag>out.action = "filter"; out.field = "date"; out.comparison = ">"; out.value = rules.sinceDate.getTime();</tag></item>
-      <item><ruleref uri="#moreThanAmount"/><tag>out.action = "filter"; out.field = "amount"; out.comparison = ">"; out.value = rules.moreThanAmount;</tag></item>
-      <item><ruleref uri="#lessThanAmount"/><tag>out.action = "filter"; out.field = "amount"; out.comparison = "&lt;"; out.value = rules.lessThanAmount;</tag></item>
-      <item>show <ruleref uri="#charges"/> from <ruleref uri="#merchant"/><tag>out.action = "filter"; out.field = "merchant"; out.comparison = "="; out.value = rules.merchant;</tag></item>
+      <item>
+        <item repeat="0-1">show</item>
+        <item repeat="0-1">recent</item>
+        <ruleref uri="#charges"/>
+        <one-of>
+          <item><ruleref uri="#sinceDate"/><tag>out.action = "filter"; out.field = "date"; out.comparison = ">"; out.value = rules.sinceDate.getTime();</tag></item>
+          <item><ruleref uri="#moreThanAmount"/><tag>out.action = "filter"; out.field = "amount"; out.comparison = ">"; out.value = rules.moreThanAmount;</tag></item>
+          <item><ruleref uri="#lessThanAmount"/><tag>out.action = "filter"; out.field = "amount"; out.comparison = "&lt;"; out.value = rules.lessThanAmount;</tag></item>
+          <item>from <ruleref uri="#merchant"/><tag>out.action = "filter"; out.field = "merchant"; out.comparison = "="; out.value = rules.merchant;</tag></item>
+        </one-of>
+      </item>
       <item><ruleref uri="#detailByIdx"/><tag>out.action = "detail"; out.idx = rules.detailByIdx;</tag></item>
       <item><ruleref uri="#chat"/><tag>out.action = "chat"</tag></item>
     </one-of>
@@ -55,15 +62,11 @@
   </rule>
 
   <rule id="sinceDate">
-    <item repeat="0-1">show</item>
-    <item repeat="0-1">recent</item>
-    <item><ruleref uri="#charges"/> since <ruleref uri="#dateFlavor"/><tag>out = rules.dateFlavor;</tag></item>
+    <item>since <ruleref uri="#dateFlavor"/><tag>out = rules.dateFlavor;</tag></item>
   </rule>
 
   <rule id="moreThanAmount">
     <item>
-      show 
-      <ruleref uri="#charges"/> 
       <one-of>
         <item>more</item>
         <item>greater</item>
@@ -75,7 +78,7 @@
 
   <rule id="lessThanAmount">
     <item>
-      show <ruleref uri="#charges"/> less than <ruleref uri="#number"/><tag>out = rules.number;</tag>
+      less than <ruleref uri="#number"/><tag>out = rules.number;</tag>
       <item repeat="0-1">dollars</item>
     </item>
   </rule>
@@ -118,8 +121,8 @@
     </one-of>
   </rule>
 
+  <!-- TODO: make this dynamic -->
   <rule id="merchant">
-    <!-- TODO: make this dynamic -->
     <one-of>
       <item>Starbucks</item>
       <item>Quiznos</item>
