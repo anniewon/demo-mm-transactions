@@ -82,12 +82,11 @@
 
   <rule id="detailByIdx">
     <one-of>
-      <!-- use #day for now, TODO: fix this later -->
       <item>
         show
         <item repeat="0-1">details of</item>
         <one-of>
-          <item>the <ruleref uri="#day"/><tag>out = rules.day - 1;</tag></item>
+          <item>the <ruleref uri="#ordering"/><tag>out = rules.ordering - 1;</tag></item>
           <item>the last<tag>out = - 1;</tag></item>
         </one-of>
         <item repeat="0-1">
@@ -245,6 +244,57 @@
     </one-of>
   </rule>
 
+  <!-- supports 1st - 99th -->
+  <rule id="ordering">
+    <tag>out = 0;</tag>
+    <one-of>
+      <item><ruleref uri="#ordering_digit"/><tag>out = rules.latest();</tag></item>  
+      <item><ruleref uri="#ordering10_19_and_10s"/><tag>out = rules.latest();</tag></item>
+      <item>
+        <ruleref uri="#val10s"/><tag>out = rules.latest();</tag>
+        <ruleref uri="#ordering_digit"/><tag> out += rules.latest();</tag>
+      </item>
+    </one-of>
+  </rule>
+
+  <rule id="ordering_digit">
+    <one-of>
+      <item>first<tag>out = 1;</tag></item>
+      <item>second<tag>out = 2;</tag></item>
+      <item>third<tag>out = 3;</tag></item>
+      <item>fourth<tag>out = 4;</tag></item>
+      <item>fifth<tag>out = 5;</tag></item>
+      <item>sixth<tag>out = 6;</tag></item>
+      <item>seventh<tag>out = 7;</tag></item>
+      <item>eighth<tag>out = 8;</tag></item>
+      <item>ninth<tag>out = 9;</tag></item>
+    </one-of>
+  </rule>
+
+  <rule id="ordering10_19_and_10s">
+    <one-of>
+      <item>tenth<tag>out = 10;</tag></item>
+      <item>eleventh<tag>out = 11;</tag></item>
+      <item>twelfth<tag>out = 12;</tag></item>
+      <item>thirteenth<tag>out = 13;</tag></item>
+      <item>fourteenth<tag>out = 14;</tag></item>
+      <item>fifteenth<tag>out = 15;</tag></item>
+      <item>sixteenth<tag>out = 16;</tag></item>
+      <item>seventeenth<tag>out = 17;</tag></item>
+      <item>eighteenth<tag>out = 18;</tag></item>
+      <item>nineteenth<tag>out = 19;</tag></item>
+      <item>twentieth<tag>out = 20;</tag></item>
+      <item>thirtieth<tag>out = 30;</tag></item>
+      <item>fourtieth<tag>out = 40;</tag></item>
+      <item>fiftieth<tag>out = 50;</tag></item>
+      <item>sixtieth<tag>out = 60;</tag></item>
+      <item>seventieth<tag>out = 70;</tag></item>
+      <item>eightieth<tag>out = 80;</tag></item>
+      <item>ninetieth<tag>out = 90;</tag></item>
+    </one-of>
+  </rule>
+
+  <!-- supports 0 - 999 -->
   <rule id="number">
     <tag>out = 0;</tag>
     <one-of>
