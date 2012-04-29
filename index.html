@@ -43,6 +43,7 @@
     });
 */
     $('#main-menu').live('pageshow', mainmenu_show);
+    $('#main-menu').live('pagebeforehide', mainmenu_beforehide);
   </script>
 
   <!-- Funky-fresh fixed header -->
@@ -107,6 +108,7 @@
     });
     $('#recent-transactions').live('pagebeforeshow', recenttransactions_beforeshow);
     $('#recent-transactions').live('pageshow', recenttransactions_show);
+    $('#recent-transactions').live('pagebeforehide', recenttransactions_beforehide);
   </script>
 
   <!-- Funky-fresh fixed header -->
@@ -143,6 +145,7 @@
   <script type="text/javascript">
     $('#transaction-detail').live('pagebeforeshow', transactiondetail_beforeshow);
     $('#transaction-detail').live('pageshow', transactiondetail_show);
+    $('#transaction-detail').live('pagebeforehide', transactiondetail_beforehide);
   </script>
 
   <!-- Funky-fresh fixed header -->

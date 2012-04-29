@@ -75,6 +75,10 @@ function mainmenu_show() {
   }
 }
 
+function mainmenu_beforehide() {
+  NativeBridge.cancelAudio();
+}
+
 function mainmenu_grammarHandler(result) {
   if (result != null && result.length > 0) {
     var interp = result[0].interpretation;
@@ -148,6 +152,10 @@ function recenttransactions_show() {
     
     recenttransactions_prompted = true;
   }
+}
+
+function recenttransactions_beforehide() {
+  NativeBridge.cancelAudio();
 }
 
 function recenttransactions_grammarHandler(result) {
@@ -232,6 +240,10 @@ function transactiondetail_show() {
     NativeBridge.playAudio("audio/RT_TransactionDetails_01.wav");
     transactiondetail_prompted = true;
   }
+}
+
+function transactiondetail_beforehide() {
+  NativeBridge.cancelAudio();
 }
 
 function transactiondetail_grammarHandler(result) {
