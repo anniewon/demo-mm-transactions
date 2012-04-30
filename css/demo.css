@@ -133,6 +133,8 @@ div.part-name {
     font-weight: bold;
     font-size: 9pt;
     padding-top: 0.0em;
+    max-width: 130px;
+    overflow: hidden;
 }
 div.part-addr {
     font-weight: normal;

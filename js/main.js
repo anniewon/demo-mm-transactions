@@ -1,5 +1,6 @@
 var gAcctNumber = 2;
-var gDynamicGrammarRootUrl = "../../perl/transdemo/grammars/dynamicgram.pl";
+var gDynamicGrammarRootUrl = 'grammars/dynamicgram.pl';
+//var gDynamicGrammarRootUrl = "../../perl/transdemo/grammars/dynamicgram.pl";
 var gMerchantDelim = "<DELIM>";
 
 //-----------------------------------------------------------------------------
@@ -17,7 +18,8 @@ function getUrlVar(name) {
 }
 
 function merchants() {
-  return encodeURIComponent(TransactionList.get_merchants(gMerchantDelim));
+  var merchants = AccountData.transactions.getMerchants();
+  return encodeURIComponent(merchants.join(gMerchantDelim));
 }
 
 //-----------------------------------------------------------------------------

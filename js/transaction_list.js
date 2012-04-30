@@ -121,7 +121,7 @@ var TransactionList = (function($) {
   }
 
   var amount_to_float = function(value) {
-    return parseFloat( value.match(/\d+(\.\d+)?$/)[0] );
+    return parseFloat( value.match(/-?\d+(\.\d+)?$/)[0] );
   };
 
 
