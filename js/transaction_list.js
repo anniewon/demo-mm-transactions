@@ -95,7 +95,6 @@ var TransactionList = (function($) {
 
 
   var init = function(callback) {
-    console.log('TransactionList.init()');
     data    = null;
     cc_num  = AccountData.account.active_cc_number();
     AccountData.transactions.display(cc_num, function(data) {
@@ -225,6 +224,7 @@ var TransactionList = (function($) {
 
   var _filter_by_amount = function(value, direction) {
     var list = [];
+    value = amount_to_float(value);
     switch (direction) {
       case 'over':
       case 'greater than':
@@ -232,6 +232,7 @@ var TransactionList = (function($) {
           return amount_to_float(transaction.amount) > value;
         });
         break;
+      case 'under':
       case 'less than':
         list = $.grep(getData().transactions, function(transaction) {
           return amount_to_float(transaction.amount) < value;
@@ -239,8 +240,8 @@ var TransactionList = (function($) {
         break;
       case 'about':
       case 'around':
-        var upper_limit = value + 50;
-        var lower_limit = value - 50;
+        var upper_limit = value + 0.50;
+        var lower_limit = value - 0.50;
         list = $.grep(getData().transactions, function(transaction) {
           var amount = amount_to_float(transaction.amount);
           return amount > lower_limit && amount < upper_limit;
@@ -299,27 +300,36 @@ var TransactionList = (function($) {
 
   // sorting functions
   var amount_sort_up = function(a, b) {
-    return amount_to_float(a.amount) > amount_to_float(b.amount);
+    return amount_to_float(a.amount) - amount_to_float(b.amount);
   };
 
   var amount_sort_down = function(a, b) {
-    return amount_to_float(a.amount) < amount_to_float(b.amount);
+    return amount_to_float(b.amount) - amount_to_float(a.amount);
+  };
+
+  var string_cmp = function(a, b) {
+    if (a > b) {
+        return 1;
+    } else if (b > a) {
+        return -1;
+    }
+    return 0;
   };
 
   var merchant_sort_up = function(a, b) {
-    return a.name > b.name
+    return string_cmp(a.name, b.name);
   };
 
   var merchant_sort_down = function(a, b) {
-    return a.name < b.name
+    return string_cmp(b.name, a.name);
   };
 
   var date_sort_up = function(a, b) {
-    return transaction_date(a) > transaction_date(b);
+    return transaction_date(a) - transaction_date(b);
   };
 
   var date_sort_down = function(a, b) {
-    return transaction_date(a) < transaction_date(b);
+    return transaction_date(b) - transaction_date(a);
   };
 
 
@@ -351,7 +361,6 @@ var TransactionList = (function($) {
 
 
   var clear_filters = function() {
-    console.log('clear_filters()');
     filters = {
       'date':     [],
       'merchant': [],

@@ -174,18 +174,21 @@ AccountData.transactions = (function($) {
 
     // Display the list of transactions in the charges-list
     var displayTransactions = function(data) {
-        var list = $("#charges-list");
-        list.empty();
-        var items = [];
-        for (var i = 0; i < data.transactions.length; i += 1) {
-            var transaction = data.transactions[i];
-            var show = transactionShort(transaction);
-            var href = transactionShowHref(i, transaction);
-            items.push('<li><a data-url="' + href + '" href="' + href + '">' + show + '</a></li>');
-        }
-        $(items.join('')).appendTo(list);
-        if (data.transactions.length > 0) {
-            list.listview('refresh');
+        var page = location.hash.replace(/\?.*/, '');
+        if (page === '#recent-transactions') {
+            var list = $("#charges-list");
+            list.empty();
+            var items = [];
+            for (var i = 0; i < data.transactions.length; i += 1) {
+                var transaction = data.transactions[i];
+                var show = transactionShort(transaction);
+                var href = transactionShowHref(i, transaction);
+                items.push('<li><a data-url="' + href + '" href="' + href + '">' + show + '</a></li>');
+            }
+            $(items.join('')).appendTo(list);
+            if (data.transactions.length > 0) {
+                list.listview('refresh');
+            }
         }
     };
 
@@ -235,7 +238,8 @@ AccountData.transactions = (function($) {
     };
 
     var show_transactions = function(data, callback) {
-        if (location.hash === '#recent-transactions') {
+        var page = location.hash.replace(/\?.*/, '');
+        if (page === '#recent-transactions') {
             displayTransactions(data);
         }
         if (typeof callback === 'function') {
@@ -284,7 +288,12 @@ AccountData.transactions = (function($) {
             });
         },
 */
-        getData: getData
+        getData: getData,
+        getMerchants: function() {
+            return getData().transactions.map(function(transaction) {
+                return transaction.merchant;
+            });
+        }
      };
 })(jQuery);
 
