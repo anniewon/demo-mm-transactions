@@ -33,7 +33,7 @@
 }
 
 .ui-btn-inner {
-    padding: 0.6em 10px !important;
+    /*padding: 0.6em 10px !important;*/
     font-size: 12px;
 }
 
@@ -87,9 +87,10 @@
 ul#charges-list li div.list-cal {
     float: left;
     width: 60px;
-    padding: 2px 2px 2px 0;
+    padding: 2px 2px 0 0;
     overflow: auto;
     border-right: 1px solid #CCCCCC;
+    height: 3.0em;
 }
 ul#charges-list li div.list-partial {
     float: left;
@@ -101,56 +102,86 @@ ul#charges-list li div.list-amount {
     float: right;
     margin-right: 25px;
     overflow: auto;
-    padding-top: 1.25em;
-    font-size: 10pt;
+    font-size: 9pt;
+    line-height: 3em;
 }
 div.cal-top {
-    font-size: 8pt;
+    font-size: 7pt;
     text-align: center;
+    color: #666;
+    overflow: none;
 }
 div.cal-bot {
     font-size: 16pt;
     text-align: center;
+    line-height: 0.9em;
+    overflow: none;
 }
 div.part-name {
     font-weight: bold;
-    font-size: 10pt;
-    padding-top: 0.5em;
+    font-size: 9pt;
+    padding-top: 0.0em;
 }
 div.part-addr {
     font-weight: normal;
-    font-size: 10pt;
-    line-height: 0.9em;
+    font-size: 9pt;
+    line-height: 1.2em;
+}
+div.part-payment {
+    font-weight: bold;
+    font-size: 9pt;
+    line-height: 1.9em;
+    padding: 0.5em 16px 0.5em 0px !important;
 }
 ul#charges-list a.ui-link-inherit {
-    padding: 0.3em 16px 0.3em 6px !important;
+    padding: 0.5em 16px 0.5em 0px !important;
+}
+ul#charges-list div.ui-btn-inner {
+    padding: 0 !important;
 }
 div.card-bits {
     background: -moz-linear-gradient(#FFF, #DDD);
     background: -webkit-linear-gradient(#FFF, #DDD);
     border-bottom: 1px solid #BBB;
     padding: 1px 0 0 0 !important;
+    overflow: hidden;
 }
 div.card-bits span.card-type {
     color: #06467C;
     font-weight: bold;
-    font-size: 12pt;
-    padding: 15px 0 0 15px;
+    font-size: 10.2pt;
+    padding: 0;
     margin: 0;
-    line-height: 1.8em;
+    line-height: 2.2em;
 }
-.card-info {
+div.card-info {
     float: right;
     border-left: 1px solid #CCC;
     margin: 0;
     padding: 0 0 0 10px;
+    height: 31px;
+    overflow: hidden;
 }
-.card-info div.ui-select {
+div.card-info div.ui-select {
     float: right;
     font-size: 15pt;
+    height: 30px;
+}
+div.card-info div.ui-select .ui-btn-corner-all {
+    border: none;
+    border-radius: 0 0 0 0;
+    background: inherit;
+}
+div.card-info div.ui-select span.ui-btn-inner {
+    padding-left: 0;
+    padding-right: 30px !important;
+}
+div#last-4-digits {
+    padding-top: 0;
+    margin-top: 0;
 }
 
-div#charge-details,
+div.charge-details,
 div#charge-list {
     color: white;
     text-shadow: none;
@@ -162,6 +193,41 @@ div#charge-list div.heading {
     color: white;
 }
 
+div.search-terms {
+    position: fixed;
+    height: 28.8px;
+    z-index: 2;
+    width: 100%;
+}
+div.search-terms > div {
+    margin: 4px 0px 4px 10px; 
+    font-size: 8pt;
+    float: left;
+    padding: 0 0 0 4px;
+    color: #235F95;
+    border: 1px solid #9FBBD0;
+    background-color: #DBE9F4;
+    -webkit-border-radius: 3px !important;
+    -moz-border-radius: 3px !important;
+    border-radius: 3px !important;
+    height: 19px;
+}
+div.search-terms > div > span {
+    line-height: 1.75em;
+}
+div.search-terms > div > span.cancel {
+    display: inline-block;
+    height: 19px;
+    width: 18px;
+    margin: -2px 0 0 3px;
+    padding: 0;
+    background-image: url(../img/blue-cancel.png);
+    background-repeat: no-repeat;
+    -webkit-background-size: 19px 18px;
+    -moz-background-size: 19px 18px;
+    background-size: 19px 18px;
+}
+
 .ui-bar-a {
     text-shadow: none !important;
 }
@@ -171,13 +237,13 @@ div#charge-list div.heading {
     font-size: 8pt;
 }
 
-ul#charge-details-values li {
+ul.charge-details-values li {
     padding: 8px 5px;
 }
-ul#charge-details-values li div.ui-grid-b {
+ul.charge-details-values li div.ui-grid-b {
     padding: 5px 0px;
 }
-ul#charge-details-values li div.double {
+ul.charge-details-values li div.double {
     width: 66.666%;
     font-size: 8pt;
 }
@@ -316,9 +382,3 @@ ul.rating li {
     border-radius: 0px 4px 4px 0px;
     border-right: 0 !important;
 }
-
-
-
-
-
-
