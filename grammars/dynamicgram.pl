@@ -297,8 +297,12 @@ use constant MAINMENU_ROOT_RULES => << 'End';
 End
 
 use constant RECENTTRANSACTIONS_ROOT_RULES => << 'End';
-      <item><ruleref uri="#sortByNewest"/><tag>out.action = "sort"; out.field = "date"; out.order = "desc";</tag></item>
-      <item>sort by date starting with the oldest<tag>out.action = "sort"; out.field = "date"; out.order = "asc";</tag></item>
+      <item>sort by date starting with the newest<tag>out.action = "sort"; out.field = "date"; out.order = "desc";</tag></item>
+      <item><ruleref uri="#sortByDateAsc"/><tag>out.action = "sort"; out.field = "date"; out.order = "asc";</tag></item>
+      <item>sort by amount starting with the highest<tag>out.action = "sort"; out.field = "amount"; out.order = "desc";</tag></item>
+      <item><ruleref uri="#sortByAmountAsc"/><tag>out.action = "sort"; out.field = "amount"; out.order = "asc";</tag></item>
+      <item><ruleref uri="#sortByNameDesc"/><tag>out.action = "sort"; out.field = "merchant"; out.order = "desc";</tag></item>
+      <item><ruleref uri="#sortByNameAsc"/><tag>out.action = "sort"; out.field = "merchant"; out.order = "asc";</tag></item>
       <item><ruleref uri="#detailByIdx"/><tag>out.action = "detail"; out.idx = rules.detailByIdx;</tag></item>
 End
 
@@ -314,9 +318,31 @@ use constant MAINMENU_EXTRA_RULES => << 'End';
 End
 
 use constant RECENTTRANSACTIONS_EXTRA_RULES => << 'End';
-  <rule id="sortByNewest">
+  <rule id="sortByDateAsc">
     <item>sort by date</item>
-    <item repeat="0-1">starting with the newest</item>
+    <item repeat="0-1">starting with the oldest</item>
+  </rule>
+
+  <rule id="sortByAmountAsc">
+    <item>sort by amount</item>
+    <item repeat="0-1">starting with the lowest</item>
+  </rule>
+
+  <rule id="sortByNameAsc">
+    <item>
+      sort by
+      <item repeat="0-1">merchant</item>
+      name
+      <item repeat="0-1">in alphabetical order</item>
+    </item>
+  </rule>
+
+  <rule id="sortByNameDesc">
+    <item>
+      sort by
+      <item repeat="0-1">merchant</item>
+      name in reverse alphabetical order
+    </item>
   </rule>
 
   <rule id="detailByIdx">
