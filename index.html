@@ -91,6 +91,7 @@
       <table width="100%" border="0"><tr>
         <!-- Don't use data-rel="back", just force it to go to the main menu -->
         <td align="left"><a href="#main-menu" data-role="none"><img src="img/back.png" class="header-button"></a></td>
+        <td align="right"><a href="" data-role="none"><img src="img/paynow.png" class="header-button-2" height="28px"></a></td>
       </tr></table>      
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
@@ -177,8 +178,11 @@
   </script>
 
   <div data-role="header" data-position="fixed" data-theme="b">
-    <div class="logo"></div>
-    <a href="#transaction-list" data-rel="back" data-role="button" data-icon="">Back</a>
+    <div class="logo">
+      <table width="100%" border="0"><tr>
+        <td align="left"><a href="#transaction-list" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"></a></td>
+      </tr></table>
+    </div>
     <div data-role="content" class="card-bits" data-theme="d">
       <span class="card-type" data-role="content">Personal Credit Card</span>
       <div class="card-info" id="last-4-digits-detail-payment"></div>
