@@ -204,12 +204,16 @@ AccountData.transactions = (function($) {
                 $('#datetime').html(transaction.full_date());
                 $('#merchant').html(transaction.merchant);
                 $('#mlocation').html(transaction.address + '<br>' + city);
-                $('#map').attr('src',
-                    'https://maps.googleapis.com/maps/api/staticmap?center=' + 
-                    encodeURIComponent(transaction.full_address()) +
-                    '&zoom=14&size=288x200&markers=' + 
-                    encodeURIComponent(transaction.full_address()) +
-                    '&sensor=false');
+                if (city == "") {
+                  $('#map').attr('src', "");
+                } else {
+                  $('#map').attr('src',
+                      'https://maps.googleapis.com/maps/api/staticmap?center=' + 
+                      encodeURIComponent(transaction.full_address()) +
+                      '&zoom=14&size=288x200&markers=' + 
+                      encodeURIComponent(transaction.full_address()) +
+                      '&sensor=false');
+                }
             }
 /*
             $('#map-canvas').gmap({
