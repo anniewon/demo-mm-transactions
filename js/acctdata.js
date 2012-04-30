@@ -291,7 +291,7 @@ AccountData.transactions = (function($) {
         getData: getData,
         getMerchants: function() {
             return $.unique(getData().transactions.map(function(transaction) {
-                return transaction.merchant;
+                return AccountData.utils.merchant_decode(transaction.merchant);
             }).sort()).sort();
         }
      };
@@ -374,6 +374,10 @@ AccountData.utils = (function($) {
     return -1; // Error in transaction object
   };
 
+  var merchant_decode = function(value) {
+    return $('<div/>').html(value).text();
+  }
+
   // Return a date object for the given transaction
   //
   // @param transaction - a transaction object from JSON
@@ -386,6 +390,7 @@ AccountData.utils = (function($) {
   return {
     timestamp_to_object: timestamp_to_object,
     transaction_date: transaction_date,
-    transaction_date_object: transaction_date_object
+    transaction_date_object: transaction_date_object,
+    merchant_decode: merchant_decode
   };
 })(jQuery);
