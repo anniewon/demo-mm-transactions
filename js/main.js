@@ -114,10 +114,12 @@ function mainmenu_grammarHandler(result) {
                        ", comparison: " + interp.comparison +
                        ", value: " + interp.value);
 
-      if (interp.field.toLowerCase() == "date") {
+      var field = interp.field.toLowerCase();
+
+      if (field == "date") {
         var date = new Date(parseFloat(interp.value));
         NativeBridge.log("mainmenu_grammarHandler - date: " + date.toLocaleString());
-        TransactionList.filter_by_date(parseFloat(interp.value), "after");
+        TransactionList.filter_by_date(parseFloat(interp.value), interp.comparison.toLowerCase());
 
       } else if (field == "merchant") {
         TransactionList.filter_by_merchant(interp.value);
