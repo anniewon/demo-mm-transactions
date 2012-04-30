@@ -222,6 +222,7 @@ div.search-terms {
     height: 28.8px;
     z-index: 2;
     width: 100%;
+    text-shadow: none;
 }
 div.search-terms > div {
     margin: 4px 0px 4px 10px; 
@@ -425,6 +426,8 @@ ul.rating li {
     z-index: 2;
     width: 100%;
     padding: 0;
+    text-shadow: none;
+    color: #000;
 }
 
 .payment-due-label {
