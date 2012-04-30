@@ -42,6 +42,20 @@
       <span class="card-type" data-role="content">Personal Credit Card</span>
       <div class="card-info" id="last-4-digits-main"></div>
     </div>
+    <div class="ui-grid-c" data-role="content" data-theme="d" style="height:13px; background: #e7e3e7" >
+      <div class="ui-block-a" style="width:18%; vertical-align: top; color: gray; font-size: 8px; font-weight: 800; line-height: 8px">
+          MINIMUM PAYMENT
+      </div>
+      <div class="ui-block-b" style="width:32%; color: black; font-size: 15px; letter-spacing: 0px; text-shadow: none">
+          $1338.93
+      </div>
+      <div class="ui-block-c" style="width:16%; vertical-align: top; text-align: left; color: gray; font-size: 8px; font-weight: 800; line-height: 8px" >
+          PAYMENT<br/>DUE
+      </div>
+      <div class="ui-block-d" style="width:34%; vertical-align: bottom; text-align: left; color: black; font-size: 15px; letter-spacing: 0px; text-shadow: none; white-space: nowrap">
+          May 3, 2012
+      </div>   
+    </div>
   </div>
 
   <div class="card-bits payment-due-notice">
@@ -99,8 +113,8 @@
     <div class="logo">
       <table width="100%" border="0"><tr>
         <!-- Don't use data-rel="back", just force it to go to the main menu -->
-        <td align="left"><a href="#main-menu" data-role="none"><img src="img/back.png" class="header-button"></a></td>
-        <td align="right"><a href="" data-role="none"><img src="img/paynow.png" class="header-button-2" height="28px"></a></td>
+        <td align="left"><a href="#main-menu" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
+        <td align="right"><a href="" data-role="none"><img src="img/paynow.png" class="header-button-2" height="28px"/></a></td>
       </tr></table>      
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
@@ -130,7 +144,8 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <td align="left"><a href="#transaction-list" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"></a></td>
+        <!-- Don't use data-rel="back", just force it to go to the recent transactions list -->
+        <td align="left"><a href="#recent-transactions" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
       </tr></table>
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
@@ -189,7 +204,7 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <td align="left"><a href="#transaction-list" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"></a></td>
+        <td align="left"><a href="#recent-transactions" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
       </tr></table>
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
@@ -225,7 +240,7 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <td align="left"><a href="#transaction-detail" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"></a></td>
+        <td align="left"><a href="#transaction-detail" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
       </tr></table>
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
@@ -263,7 +278,7 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <td align="left"><a href="#dispute" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"></a></td>
+        <td align="left"><a href="#dispute" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
       </tr></table>
     </div>
   </div>
@@ -288,7 +303,8 @@
       </div>
     </div>
     <div class="btn-cont">
-      <a href="javascript:;" data-role="button" data-icon="" class="big-btn no-icon">Submit</a>
+      <!-- just make it go to the main menu for now -->
+      <a href="#main-menu" data-role="button" data-icon="" class="big-btn no-icon">Submit</a>
     </div>
     &nbsp;<br>&nbsp;  <!-- hack -->
   </div>
@@ -299,16 +315,19 @@
     $('#chat').on('pageshow', chat_show);
   </script>
   <div data-role="header" data-position="fixed" data-theme="b">
-    <div class="logo">
+    <div class="logo-chat">
       <table width="100%" border="0"><tr>
-        <td align="right"><a href="" data-rel="back" data-role="none"><img src="img/done.png" class="header-button"></a></td>
+        <td align="right"><a href="" data-rel="back" data-role="none"><img src="img/done.png" class="header-button"/></a></td>
       </tr></table>
     </div>
   </div>
 
   <div data-role="content">
+    <div data-role="content" class="chat-bubble-cont">
+      <img src="img/chat-bubble.png" class="chat-bubble" />
+    </div>
     <div data-role="fieldcontain">
-    <input type="text" name="question" id="question" 
+    <input type="text" name="question" id="question" style="color: gray"
       onfocus="if(this.value==this.defaultValue)this.value=''" 
       onblur="if(this.value=='')this.value=this.defaultValue" 
       value="Type your question.." />

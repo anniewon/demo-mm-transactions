@@ -279,6 +279,13 @@ ul.charge-details-values li div.double {
     border-top: 1px solid #CCC;
 }
 
+.map {
+    width: 288;
+    height: 200;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+
 /* Dispute confirmation */
 
 .dispute-header {
@@ -449,4 +456,27 @@ ul.rating li {
     -webkit-border-radius: 4px 4px 4px 4px;
     -moz-border-radius: 4px 4px 4px 4px;
     border-radius: 4px 4px 4px 4px;
+}
+
+/* Chat */
+
+.logo-chat {
+    background: url("../img/logo-chat.png") no-repeat;
+    width: 320px;
+    height: 42px;
+}
+
+.chat-bubble-cont {
+    background-color: #CCCCCC;
+    height: 150px;
+    width: 100%;
+    padding: 10px 5px 0 0 !important;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.chat-bubble {
+    width: 295px;
+    height: 55px;
 }

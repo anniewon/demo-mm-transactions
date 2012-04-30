@@ -536,6 +536,27 @@ var TransactionList = (function($) {
         }
       }
       return trans_idx;
+    },
+
+    // Returns delimited string of merchant names.
+    //
+    // @param delim  delimiter
+    // @return str   delimited string of merchant names
+    get_merchants: function(delim) {
+      getData();
+      var merchants = '';
+      var merchantHash = new Object();
+      for (var i = 0; i < data.transactions.length; i += 1) {
+        var merchant = data.transactions[i].name;
+        if (i == 0 || merchantHash[merchant] == undefined) {
+          merchantHash[merchant] = merchant;
+          if (i > 0) {
+            merchants += delim;
+          }
+          merchants += merchant;
+        }
+      }
+      return merchants;
     }
   };
 })(jQuery);

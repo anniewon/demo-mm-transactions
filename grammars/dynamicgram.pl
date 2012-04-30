@@ -58,9 +58,9 @@ use constant GRXML => << 'End';
         <item repeat="0-1">recent</item>
         <ruleref uri="#charges"/>
         <one-of>
-          <item><ruleref uri="#sinceDate"/><tag>out.action = "filter"; out.field = "date"; out.comparison = ">"; out.value = rules.sinceDate.getTime();</tag></item>
-          <item><ruleref uri="#moreThanAmount"/><tag>out.action = "filter"; out.field = "amount"; out.comparison = ">"; out.value = rules.moreThanAmount;</tag></item>
-          <item><ruleref uri="#lessThanAmount"/><tag>out.action = "filter"; out.field = "amount"; out.comparison = "&lt;"; out.value = rules.lessThanAmount;</tag></item>
+          <item><ruleref uri="#sinceDate"/><tag>out.action = "filter"; out.field = "date"; out.comparison = "since"; out.value = rules.sinceDate.getTime();</tag></item>
+          <item><ruleref uri="#moreThanAmount"/><tag>out.action = "filter"; out.field = "amount"; out.comparison = "greater than"; out.value = rules.moreThanAmount;</tag></item>
+          <item><ruleref uri="#lessThanAmount"/><tag>out.action = "filter"; out.field = "amount"; out.comparison = "less than"; out.value = rules.lessThanAmount;</tag></item>
           %s
         </one-of>
       </item>
@@ -293,8 +293,8 @@ use constant MAINMENU_ROOT_RULES => << 'End';
 End
 
 use constant RECENTTRANSACTIONS_ROOT_RULES => << 'End';
-      <item><ruleref uri="#sortByNewest"/><tag>out.action = "sort"; out.field = "date"; out.order = "descending";</tag></item>
-      <item>sort by date starting with the oldest<tag>out.action = "sort"; out.field = "date"; out.order = "ascending";</tag></item>
+      <item><ruleref uri="#sortByNewest"/><tag>out.action = "sort"; out.field = "date"; out.order = "desc";</tag></item>
+      <item>sort by date starting with the oldest<tag>out.action = "sort"; out.field = "date"; out.order = "asc";</tag></item>
       <item><ruleref uri="#detailByIdx"/><tag>out.action = "detail"; out.idx = rules.detailByIdx;</tag></item>
 End
 
@@ -403,7 +403,7 @@ use constant MERCHANT_RULE => << 'End';
 End
 
 use constant ITEM => << 'End';
-    <item>%s</item>
+    <item>%s<tag>out="%s";</tag></item>
 End
 
 our  %xml_entity_map = qw(& amp < lt > gt " quot ' apos);
@@ -442,7 +442,9 @@ $R->no_cache(1);                  # Send Pragma and Cache-Control headers
     $merchant_items = '';
     my @merchant_list = split(/<DELIM>/, $merchants);
     foreach my $merchant (@merchant_list) {
-        $merchant_items .= sprintf(ITEM, xml_escape($merchant));
+        my $merchant_item = $merchant;
+        $merchant_item =~ s/&/and/g;
+        $merchant_items .= sprintf(ITEM, xml_escape($merchant_item), xml_escape($merchant));
     }
 
     if ($merchant_items ne '') {
