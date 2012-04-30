@@ -71,14 +71,20 @@ function mainmenu_grammar() {
 }
 
 function mainmenu_beforeshow() {
-  console.log('function mainmenu_beforeshow()');
   AccountData.account.init(gAcctNumber);
-  AccountData.account.initDropdown('last-4-digits-main', false);
+  AccountData.account.initDropdown('last-4-digits-main', false, function(dropdown, data) {
+    // Callback sets up onchange handler for dropdown
+    dropdown.on('change', function () {
+        TransactionList.init();
+    });
+
+    // Initiate onchange event
+    dropdown.change();
+  });
   TransactionList.clear_filters();
 }
 
 function mainmenu_show() {
-  console.log('function mainmenu_show()');
   mainmenu_reco_errors = 0;
   NativeBridge.setMessage("How can I help you?");
   NativeBridge.setGrammar(mainmenu_grammar(), null, mainmenu_grammarHandler);
@@ -89,7 +95,6 @@ function mainmenu_show() {
 }
 
 function mainmenu_beforehide() {
-  console.log('function mainmenu_beforehide()');
   NativeBridge.cancelAudio();
 }
 
@@ -162,14 +167,12 @@ function recenttransactions_grammar() {
 }
 
 function recenttransactions_beforeshow() {
-  console.log('function recenttransactions_beforeshow()');
   recenttransactions_reco_errors = 0;
   NativeBridge.setMessage(null);
   NativeBridge.setGrammar(recenttransactions_grammar(), null, recenttransactions_grammarHandler);
 }
 
 function recenttransactions_show() {
-  console.log('function recenttransactions_show()');
   if (!recenttransactions_prompted) {
     NativeBridge.playAudio("audio/RT_RecentTransactions_01.wav");
     
@@ -193,7 +196,6 @@ function recenttransactions_dropdown() {
 }
 
 function recenttransactions_beforehide() {
-  console.log('function recenttransactions_beforehide()');
   NativeBridge.cancelAudio();
 }
 
@@ -289,7 +291,6 @@ function detail_init(dropdown_container_id) {
 }
 
 function transactiondetail_beforeshow() {
-  console.log('function transactiondetail_beforeshow()');
   detail_init('last-4-digits-detail');
 
   transactiondetail_reco_errors = 0;
@@ -298,7 +299,6 @@ function transactiondetail_beforeshow() {
 }
 
 function transactiondetail_show() {
-  console.log('function transactiondetail_show()');
   if (!transactiondetail_prompted) {
     NativeBridge.playAudio("audio/RT_TransactionDetails_01.wav");
     transactiondetail_prompted = true;
@@ -306,7 +306,6 @@ function transactiondetail_show() {
 }
 
 function transactiondetail_beforehide() {
-  console.log('function transactiondetail_beforehide()');
   NativeBridge.cancelAudio();
   return false;
 }
@@ -359,7 +358,6 @@ function transactiondetail_grammarHandler(result) {
 }
 
 function paymentdetail_init() {
-  console.log('function paymentdetail_init()');
   detail_init('last-4-digits-detail-payment');
 }
 
@@ -368,7 +366,6 @@ function paymentdetail_init() {
 var dispute_reco_errors = 0;
 
 function dispute_beforeshow() {
-  console.log('function dispute_beforeshow()');
   dispute_reco_errors = 0;
   NativeBridge.setMessage(null);
   NativeBridge.setGrammar("grammars/dispute.grxml", null, dispute_grammarHandler);
@@ -418,7 +415,6 @@ function dispute_grammarHandler(result) {
 var survey_reco_errors = 0;
 
 function survey_beforeshow() {
-  console.log('function survey_beforeshow()');
   survey_reco_errors = 0;
   NativeBridge.setMessage(null);
   //NativeBridge.setGrammar("grammars/survey.grxml", null, survey_grammarHandler);
@@ -486,7 +482,6 @@ function survey_doStar(vid){
 //-----------------------------------------------------------------------------
 
 function chat_show() {
-  console.log('function chat_show()');
   NativeBridge.setMessage(null);
   NativeBridge.setGrammar(null, null, emptyGrammarHandler);
 }
