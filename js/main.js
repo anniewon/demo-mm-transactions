@@ -1,4 +1,5 @@
-var gResourceRootUrl = location.protocol + '//' + location.hostname + "/247demo/transactions/";
+var gResourceRootUrl = location.protocol + '//' + location.hostname + "/demo-mm-transactions/";
+var gAcctNumber = 1;
 
 //-----------------------------------------------------------------------------
 
@@ -32,10 +33,17 @@ function emptyGrammarHandler(result) {
 //-----------------------------------------------------------------------------
 
 function mainmenu_init() {
+  console.log('mainmenu_init()');
+
   NativeBridge.setMessage("How can I help you?");
   NativeBridge.setGrammar(gResourceRootUrl + "grammars/mainmenu.grxml", null, mainmenu_grammarHandler);
   NativeBridge.playTTS(tts_gender, tts_locale, "How can I help you?");
+
+  AccountData.account.init(gAcctNumber);
+  AccountData.account.initDropdown('last-4-digits-main', false);
+  TransactionList.clear_filters();
 }
+
 
 function mainmenu_grammarHandler(result) {
   if (result != null && result.length > 0) {
@@ -66,6 +74,20 @@ function recenttransactions_init() {
     NativeBridge.playTTS(tts_gender, tts_locale, "Here are your recent transactions. You can say things like Sort by Date or show charges since April 25th.");
     recenttransactions_prompted = true;
   }
+  AccountData.account.init(gAcctNumber);
+  recenttransactions_dropdown();
+}
+
+function recenttransactions_dropdown() {
+    AccountData.account.initDropdown('last-4-digits', false, function(dropdown, results) {
+        // Callback sets up onchange handler for dropdown
+        dropdown.on('change', function () {
+            TransactionList.init();
+        });
+
+        // Initiate onchange event
+        dropdown.change();
+    });
 }
 
 function recenttransactions_grammarHandler(result) {
@@ -98,12 +120,16 @@ function recenttransactions_grammarHandler(result) {
 var transactiondetail_prompted = false;
 var transactiondetail_reco_errors = 0;
 
-function transactiondetail_init() {
-  var cc_number = getUrlVar("cc_number");
+function detail_init(dropdown_container_id) {
+  var index = getUrlVar('index');
   var transaction_id = getUrlVar("transaction_id");
-  AccountData.account.initDropdown("last-4-digits-detail", g_acct_number, cc_number, null);
-  AccountData.transactions.displayTransaction(cc_number, transaction_id);
+
+  AccountData.account.init(gAcctNumber);
+  AccountData.account.initDropdown(dropdown_container_id, true);
+  var cc_number = AccountData.account.active_cc_number();
+
   $("#dispute-button").attr("href", "#dispute?cc_number=" + cc_number + "&transaction_id=" + transaction_id);
+  TransactionList.show_transaction(index);
 
   transactiondetail_reco_errors = 0;
   NativeBridge.setMessage(null);
@@ -112,6 +138,14 @@ function transactiondetail_init() {
     NativeBridge.playTTS(tts_gender, tts_locale, "Here are the details. You can say Dispute this charge or Go back");
     transactiondetail_prompted = true;
   }
+}
+
+function transactiondetail_init() {
+  detail_init('last-4-digits-detail');
+}
+
+function paymentdetail_init() {
+  detail_init('last-4-digits-detail-payment');
 }
 
 function transactiondetail_grammarHandler(result) {
@@ -156,8 +190,8 @@ function dispute_init() {
   NativeBridge.setMessage(null);
   NativeBridge.setGrammar(null, null, emptyGrammarHandler);
 
-  var cc_number = getUrlVar("cc_number");
-  AccountData.account.initDropdown("last-4-digits-dispute", g_acct_number, cc_number, null);
+  AccountData.account.init(gAcctNumber);
+  AccountData.account.initDropdown('last-4-digits-dispute', true);
 }
 
 //-----------------------------------------------------------------------------
@@ -165,6 +199,9 @@ function dispute_init() {
 function survey_init() {
   NativeBridge.setMessage(null);
   NativeBridge.setGrammar(null, null, emptyGrammarHandler);
+
+  AccountData.account.init(gAcctNumber);
+  AccountData.account.initDropdown('last-4-digits-dispute', true);
 }
 
 function survey_doStar(vid){
