@@ -90,8 +90,8 @@
     <div class="logo">
       <table width="100%" border="0"><tr>
         <!-- Don't use data-rel="back", just force it to go to the main menu -->
-        <td align="left"><a href="#main-menu" data-role="none"><img src="img/back.png" class="header-button"></a></td>
-        <td align="right"><a href="" data-role="none"><img src="img/paynow.png" class="header-button-2" height="28px"></a></td>
+        <td align="left"><a href="#main-menu" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
+        <td align="right"><a href="" data-role="none"><img src="img/paynow.png" class="header-button-2" height="28px"/></a></td>
       </tr></table>      
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
@@ -122,7 +122,7 @@
     <div class="logo">
       <table width="100%" border="0"><tr>
         <!-- Don't use data-rel="back", just force it to go to the recent transactions list -->
-        <td align="left"><a href="#recent-transactions" data-role="none"><img src="img/back.png" class="header-button"></a></td>
+        <td align="left"><a href="#recent-transactions" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
       </tr></table>
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
@@ -161,7 +161,7 @@
 
     <!-- Map -->
     <div data-role="content">
-      <img alt="Merchant Map" id="map" src="" width="288" height="200" />
+      <img alt="Merchant Map" id="map" src="" class="map" />
 <!--
       <ul data-role="listview" data-inset="true" style="margin: 0; padding: 0;">
         <li style="margin:0;padding:2px;">
@@ -181,7 +181,7 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <td align="left"><a href="#recent-transactions" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"></a></td>
+        <td align="left"><a href="#recent-transactions" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
       </tr></table>
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
@@ -217,7 +217,7 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <td align="left"><a href="#transaction-detail" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"></a></td>
+        <td align="left"><a href="#transaction-detail" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
       </tr></table>
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
@@ -255,7 +255,7 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <td align="left"><a href="#dispute" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"></a></td>
+        <td align="left"><a href="#dispute" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
       </tr></table>
     </div>
   </div>
@@ -291,16 +291,19 @@
     $('#chat').on('pageshow', chat_show);
   </script>
   <div data-role="header" data-position="fixed" data-theme="b">
-    <div class="logo">
+    <div class="logo-chat">
       <table width="100%" border="0"><tr>
-        <td align="right"><a href="" data-rel="back" data-role="none"><img src="img/done.png" class="header-button"></a></td>
+        <td align="right"><a href="" data-rel="back" data-role="none"><img src="img/done.png" class="header-button"/></a></td>
       </tr></table>
     </div>
   </div>
 
   <div data-role="content">
+    <div data-role="content" class="chat-bubble-cont">
+      <img src="img/chat-bubble.png" class="chat-bubble" />
+    </div>
     <div data-role="fieldcontain">
-    <input type="text" name="question" id="question" 
+    <input type="text" name="question" id="question" style="color: gray"
       onfocus="if(this.value==this.defaultValue)this.value=''" 
       onblur="if(this.value=='')this.value=this.defaultValue" 
       value="Type your question.." />
