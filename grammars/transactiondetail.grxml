@@ -5,11 +5,11 @@
 
   <rule id="rootrule" scope="public">
     <one-of>
-      <item><ruleref uri="#dispute"/><tag>out = "dispute"</tag></item>
-      <item><ruleref uri="#next"/><tag>out = "next"</tag></item>
-      <item><ruleref uri="#previous"/><tag>out = "previous"</tag></item>
+      <item><ruleref uri="#dispute"/><tag>out = "dispute";</tag></item>
+      <item><ruleref uri="#next"/><tag>out = "next";</tag></item>
+      <item><ruleref uri="#previous"/><tag>out = "previous";</tag></item>
       <item>go back</item>
-      <item><ruleref uri="#chat"/><tag>out = "chat"</tag></item>
+      <item><ruleref uri="#chat"/><tag>out = "chat";</tag></item>
     </one-of>
   </rule>
 
@@ -30,7 +30,7 @@
     <item repeat="0-1">
       <one-of>
         <item>one</item>
-        <ruleref uri="#charge"/>
+        <item><ruleref uri="#charge"/></item>
       </one-of>
     </item>
   </rule>
@@ -40,12 +40,12 @@
     <item repeat="0-1">
       <one-of>
         <item>one</item>
-        <ruleref uri="#charge"/>
+        <item><ruleref uri="#charge"/></item>
       </one-of>
     </item>
   </rule>
 
-  <rule id="charge">
+  <rule id="charge" scope="private">
     <one-of>
       <item>charge</item>
       <item>transaction</item>
