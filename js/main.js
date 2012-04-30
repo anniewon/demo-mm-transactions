@@ -19,6 +19,11 @@ function getUrlVar(name) {
 function merchants() {
   //TODO:
   var merchants =
+    "Rock Bottom Brewery" + gMerchantDelim +
+    "Camera Cinemas" + gMerchantDelim +
+    "Pizza My Heart" + gMerchantDelim +
+    "Barnes & Noble" + gMerchantDelim +
+    "LeBoulanger" + gMerchantDelim +
     "Starbucks" + gMerchantDelim +
     "Quiznos" + gMerchantDelim +
     "Safeway" + gMerchantDelim +
@@ -27,7 +32,7 @@ function merchants() {
     "Lou Malnati's" + gMerchantDelim +
     "Hotel Burnham" + gMerchantDelim +
     "Elmwood Cafe" + gMerchantDelim +
-    "C &amp; C Cleaners" + gMerchantDelim +
+    "C & C Cleaners" + gMerchantDelim +
     "Amazon.com" + gMerchantDelim +
     "San Francisco Museum of Modern Art" + gMerchantDelim +
     "Le Charm French Bistro" + gMerchantDelim +
@@ -95,7 +100,6 @@ function mainmenu_grammarHandler(result) {
     var action = interp.action.toLowerCase();
     NativeBridge.log("mainmenu_grammarHandler - reco result: " + action);
 
-    // TODO:
     if (action == "recent transactions") {        
       mainmenu_reco_errors = 0;
       $.mobile.changePage($("#recent-transactions"));
@@ -109,10 +113,17 @@ function mainmenu_grammarHandler(result) {
       if (interp.field.toLowerCase() == "date") {
         var date = new Date(parseFloat(interp.value));
         NativeBridge.log("mainmenu_grammarHandler - date: " + date.toLocaleString());
+        TransactionList.filter_by_date(parseFloat(interp.value), "after");
+
+      } else if (field == "merchant") {
+        TransactionList.filter_by_merchant(interp.value);
+
+      } else if (field == "amount") {
+        TransactionList.filter_by_amount(parseInt(interp.value), interp.comparison.toLowerCase());
       }
 
       mainmenu_reco_errors = 0;
-      NativeBridge.setGrammar(mainmenu_grammar(), null, mainmenu_grammarHandler);
+      $.mobile.changePage($("#recent-transactions"));
 
     } else if (action == "payment" ||
                action == "atm" ||
@@ -192,13 +203,13 @@ function recenttransactions_grammarHandler(result) {
     var action = interp.action.toLowerCase();
     NativeBridge.log("recenttransactions_grammarHandler - reco result: " + action);
 
-    // TODO:
     if (action == "sort") {
       NativeBridge.log("recenttransactions_grammarHandler - sort" +
                        ", field: " + interp.field + 
                        ", order: " + interp.order);
       
       recenttransactions_reco_errors = 0;
+      TransactionList.sort(interp.field.toLowerCase(), interp.order.toLowerCase());
       NativeBridge.setGrammar(recenttransactions_grammar(), null, recenttransactions_grammarHandler);
 
     } else if (action == "filter") {
@@ -207,9 +218,18 @@ function recenttransactions_grammarHandler(result) {
                        ", comparison: " + interp.comparison +
                        ", value: " + interp.value);
 
-      if (interp.field.toLowerCase() == "date") {
+      var field = interp.field.toLowerCase();
+
+      if (field == "date") {
         var date = new Date(parseFloat(interp.value));
         NativeBridge.log("recenttransactions_grammarHandler - date: " + date.toLocaleString());
+        TransactionList.filter_by_date(parseFloat(interp.value), "after");
+
+      } else if (field == "merchant") {
+        TransactionList.filter_by_merchant(interp.value);
+
+      } else if (field == "amount") {
+        TransactionList.filter_by_amount(parseInt(interp.value), interp.comparison.toLowerCase());
       }
 
       recenttransactions_reco_errors = 0;
@@ -220,7 +240,8 @@ function recenttransactions_grammarHandler(result) {
                        ", idx: " + interp.idx);
 
       recenttransactions_reco_errors = 0;
-      NativeBridge.setGrammar(recenttransactions_grammar(), null, recenttransactions_grammarHandler);
+      TransactionList.show_transaction(parseInt(interp.idx));
+      $.mobile.changePage($("#transaction-detail"));
 
     } else if (action == "chat") {
       recenttransactions_reco_errors = 0;
@@ -264,16 +285,16 @@ function detail_init(dropdown_container_id) {
 
     $("#dispute-button").attr("href", "#dispute?cc_number=" + cc_number + "&transaction_id=" + transaction_id);
     TransactionList.show_transaction(index);
-
-    transactiondetail_reco_errors = 0;
-    NativeBridge.setMessage(null);
-    NativeBridge.setGrammar("grammars/transactiondetail.grxml", null, transactiondetail_grammarHandler);
   }
 }
 
 function transactiondetail_beforeshow() {
   console.log('function transactiondetail_beforeshow()');
   detail_init('last-4-digits-detail');
+
+  transactiondetail_reco_errors = 0;
+  NativeBridge.setMessage(null);
+  NativeBridge.setGrammar("grammars/transactiondetail.grxml", null, transactiondetail_grammarHandler);
 }
 
 function transactiondetail_show() {
@@ -302,16 +323,16 @@ function transactiondetail_grammarHandler(result) {
     } else if (interp == "next") {
       transactiondetail_reco_errors = 0;
       NativeBridge.setGrammar("grammars/transactiondetail.grxml", null, transactiondetail_grammarHandler);
-      // TODO:
+      TransactionList.show_next_transaction();
 
     } else if (interp == "previous") {
       transactiondetail_reco_errors = 0;
       NativeBridge.setGrammar("grammars/transactiondetail.grxml", null, transactiondetail_grammarHandler);
-      // TODO:
+      TransactionList.show_prev_transaction();
 
     } else if (interp == "go back") {
       transactiondetail_reco_errors = 0;
-      history.back();
+      $.mobile.changePage($("#recent-transactions"));
 
     } else if (interp == "chat") {
       transactiondetail_reco_errors = 0;
