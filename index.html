@@ -21,6 +21,7 @@
   <script type="text/javascript" src="common/js/bridge.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
   <script type="text/javascript" src="js/acctdata.js"></script>
+  <script type="text/javascript" src="js/transaction_list.js"></script>
 
  <script type="text/javascript">
   </script>
@@ -30,25 +31,13 @@
 
 <div data-role="page" id="main-menu" data-title="Main Menu">
   <script type="text/javascript">
-/*
-    // Load the account data
-    AccountData.account.initDropdown("last-4-digits-main", g_acct_number, null, function(dropdown, results) {
-        // Callback sets up onchange handler for dropdown
-        dropdown.on('change', function () {
-            var cc_num = dropdown.attr('value');
-            AccountData.transactions.display(cc_num);
-        });
-        // Initiate onchange event
-        dropdown.change();
-    });
-*/
-    $('#main-menu').live('pagebeforeshow', mainmenu_init);
+    $('#main-menu').on('pagebeforeshow', mainmenu_init);
   </script>
 
   <!-- Funky-fresh fixed header -->
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo"></div>
-    <div data-role="content" id="card-bits" class="card-bits" data-theme="d">
+    <div data-role="content" class="card-bits" data-theme="d">
       <span class="card-type" data-role="content">Personal Credit Card</span>
       <div class="card-info" id="last-4-digits-main"></div>
     </div>
@@ -64,59 +53,48 @@
     <!-- Navigation -->
     <div class="ui-grid-b">
       <div class="ui-block-a main-menu-item-cont">
-        <img src="img/menu1.png" class="main-menu-item" onclick='$.mobile.changePage($("#recent-transactions"))' />
+        <img alt="Recent Transactions" src="img/menu1.png" class="main-menu-item" onclick='$.mobile.changePage($("#recent-transactions"))' />
       </div>
       <div class="ui-block-b main-menu-item-cont">
-        <img src="img/menu2.png" class="main-menu-item" onclick='javascript:;' />
+        <img alt="Make a Payment" src="img/menu2.png" class="main-menu-item" onclick='javascript:;' />
       </div>
       <div class="ui-block-c main-menu-item-cont">
-        <img src="img/menu3.png" class="main-menu-item" onclick='javascript:;' />
+        <img alt="Find an ATM" src="img/menu3.png" class="main-menu-item" onclick='javascript:;' />
       </div>
       <div class="ui-block-a main-menu-item-cont">
-        <img src="img/menu4.png" class="main-menu-item" onclick='javascript:;' />
+        <img alt="Reward Points" src="img/menu4.png" class="main-menu-item" onclick='javascript:;' />
       </div>
       <div class="ui-block-b main-menu-item-cont">
-        <img src="img/menu5.png" class="main-menu-item" onclick='javascript:;' />
+        <img alt="Contact Us" src="img/menu5.png" class="main-menu-item" onclick='javascript:;' />
       </div>
       <div class="ui-block-c main-menu-item-cont">
-        <img src="img/menu6.png" class="main-menu-item" onclick='javascript:;' />
+        <img alt="Report a Missing Card" src="img/menu6.png" class="main-menu-item" onclick='javascript:;' />
       </div>
     </div>
   </div>
 
-  <!-- Throw-down footer
-  <div class="footer" data-role="footer">
-    <div data-role="content">
-      <div><img alt="lock icon" src="img/lock.png" /> Secure Area</div>
-      <div>&copy; 247 Customer. All rights reserved.</div>
-    </div>
-  </div-->
 </div>
+
 
 <div id="recent-transactions" data-role="page">
   <script type="text/javascript">
-    // Load the account data
-    AccountData.account.initDropdown("last-4-digits", g_acct_number, null, function(dropdown, results) {
-        // Callback sets up onchange handler for dropdown
-        dropdown.on('change', function () {
-            var cc_num = dropdown.attr('value');
-            AccountData.transactions.display(cc_num);
-        });
-        // Initiate onchange event
-        dropdown.change();
+    $('#recent-transactions').on('pagebeforeshow', recenttransactions_init);
+    $('#recent-transactions').on('pageshow', function() {
+      $('#charges-list').listview('refresh');
     });
-    $('#recent-transactions').live('pagebeforeshow', recenttransactions_init);
   </script>
 
-  <!-- Funky-fresh fixed header -->
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo"></div>
     <a href="#main-list" data-rel="back" data-role="button" data-icon="">Back</a>
     <a href="#pay-now" data-role="button" data-icon="">Pay Now</a>
-    <div data-role="content" id="card-bits" class="card-bits" data-theme="d">
+    <div data-role="content" class="card-bits" data-theme="d">
       <span class="card-type" data-role="content">Personal Credit Card</span>
       <div class="card-info" id="last-4-digits"></div>
     </div>
+  </div>
+
+  <div id="search-terms" class="card-bits search-terms" style="display: none;">
   </div>
 
   <div id="charge-list" data-role="content">
@@ -124,34 +102,26 @@
    <div class="heading">Recent Transactions</div>
    <ul id="charges-list" data-role="listview" data-inset="true"></ul>
   </div>
-
-  <!-- Throw-down footer
-  <div class="footer" data-role="footer">
-    <div data-role="content">
-      <div><img alt="lock icon" src="img/lock.png" /> Secure Area</div>
-      <div>&copy; 247 Customer. All rights reserved.</div>
-    </div>
-  </div-->
 </div>
  
+
 <div id="transaction-detail" data-role="page">
   <script type="text/javascript">
-    $('#transaction-detail').live('pagebeforeshow', transactiondetail_init);
+    $('#transaction-detail').on('pagebeforeshow', transactiondetail_init);
   </script>
 
-  <!-- Funky-fresh fixed header -->
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo"></div>
     <a href="#transaction-list" data-rel="back" data-role="button" data-icon="">Back</a>
-    <div data-role="content" id="card-bits" class="card-bits" data-theme="d">
+    <div data-role="content" class="card-bits" data-theme="d">
       <span class="card-type" data-role="content">Personal Credit Card</span>
       <div class="card-info" id="last-4-digits-detail"></div>
     </div>
   </div>
 
-  <div data-role="content" id="charge-details">
+  <div data-role="content" class="charge-details">
     <div data-role="page-content">
-      <ul data-role="listview" id="charge-details-values" data-inset="true">
+      <ul data-role="listview" class="charge-details-values" data-inset="true">
         <li>
           <div class="ui-grid-b" data-role="content">
             <div class="ui-block-b detail-type">AMOUNT:</div>
@@ -179,34 +149,60 @@
 
     <!-- Map -->
     <div data-role="content">
-      <img id="map" src="" width="288" height="200" />
-      <!--ul data-role="listview" data-inset="true" style="margin: 0; padding: 0;">
+      <img alt="Merchant Map" id="map" src="" width="288" height="200" />
+<!--
+      <ul data-role="listview" data-inset="true" style="margin: 0; padding: 0;">
         <li style="margin:0;padding:2px;">
           <div id="map-canvas" style="height: 250px; width: 100%;"></div>
         </li>
-      </ul-->
+      </ul>
+-->
+    </div>
+  </div>
+</div>
+
+<div id="payment-detail" data-role="page">
+  <script type="text/javascript">
+    $('#payment-detail').on('pagebeforeshow', paymentdetail_init);
+  </script>
+
+  <div data-role="header" data-position="fixed" data-theme="b">
+    <div class="logo"></div>
+    <a href="#transaction-list" data-rel="back" data-role="button" data-icon="">Back</a>
+    <div data-role="content" class="card-bits" data-theme="d">
+      <span class="card-type" data-role="content">Personal Credit Card</span>
+      <div class="card-info" id="last-4-digits-detail-payment"></div>
     </div>
   </div>
 
-  <!-- Throw-down footer
-  <div class="footer" data-role="footer">
-    <div data-role="content">
-      <div><img alt="lock icon" src="img/lock.png" /> Secure Area</div>
-      <div>&copy; 247 Customer. All rights reserved.</div>
+  <div data-role="content" class="charge-details">
+    <div data-role="page-content">
+      <ul data-role="listview" class="charge-details-values" data-inset="true">
+        <li>
+          <div class="ui-grid-b" data-role="content">
+            <div class="ui-block-b detail-type">PAYMENT:</div>
+            <div class="ui-block-b double" id="payment-amount"></div>
+          </div>
+          <div class="ui-grid-b top-border" data-role="content">
+            <div class="ui-block-b detail-type">DATE &amp; TIME:</div>
+            <div class="ui-block-b double" id="payment-datetime"></div>
+          </div>
+        </li>
+      </ul>
     </div>
-  </div-->
+
+  </div>
 </div>
 
 <div id="dispute" data-role="page">
   <script type="text/javascript">
-    $('#dispute').live('pagebeforeshow', dispute_init);
+    $('#dispute').on('pagebeforeshow', dispute_init);
   </script>
 
-  <!-- Funky-fresh fixed header -->
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo"></div>
     <a href="#transaction-detail" data-rel="back" data-role="button" data-icon="">Back</a>
-    <div data-role="content" id="card-bits" class="card-bits" data-theme="d">
+    <div data-role="content" class="card-bits" data-theme="d">
       <span class="card-type" data-role="content">Personal Credit Card</span>
       <div class="card-info" id="last-4-digits-dispute"></div>
     </div>
@@ -231,22 +227,13 @@
     </div>
     &nbsp;<br><br><br><br>&nbsp;  <!-- hack -->
   </div>
-
-  <!-- Throw-down footer
-  <div class="footer" data-role="footer">
-    <div data-role="content">
-      <div><img alt="lock icon" src="img/lock.png" /> Secure Area</div>
-      <div>&copy; [24]7 Customer. All rights reserved.</div>
-    </div>
-  </div-->
 </div>
 
 <div id="survey" data-role="page">
   <script type="text/javascript">
-    $('#survey').live('pagebeforeshow', survey_init);
+    $('#survey').on('pagebeforeshow', survey_init);
   </script>
 
-  <!-- Funky-fresh fixed header -->
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo"></div>
     <a href="#dispute" data-rel="back" data-role="button" data-icon="">Back</a>
@@ -276,18 +263,9 @@
     </div>
     &nbsp;<br>&nbsp;  <!-- hack -->
   </div>
-
-  <!-- Throw-down footer
-  <div class="footer" data-role="footer">
-    <div data-role="content">
-      <div><img alt="lock icon" src="img/lock.png" /> Secure Area</div>
-      <div>&copy; [24]7 Customer. All rights reserved.</div>
-    </div>
-  </div-->
 </div>
 
 <div id="chat" data-role="page">
-  <!-- Funky-fresh fixed header -->
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo"></div>
     <a href="" data-rel="back" data-role="button" data-icon="" class="ui-btn-right">Done</a>
@@ -301,14 +279,6 @@
       value="Type your question.." />
     </div>
   </div>
-
-  <!-- Throw-down footer
-  <div class="footer" data-role="footer">
-    <div data-role="content">
-      <div><img alt="lock icon" src="img/lock.png" /> Secure Area</div>
-      <div>&copy; [24]7 Customer. All rights reserved.</div>
-    </div>
-  </div-->
 </div>
 
 </body>
