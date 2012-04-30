@@ -102,6 +102,11 @@ var TransactionList = (function($) {
         callback(data);
       }
       apply_filters();
+      if ($.mobile.activePage.attr('id') == 'main-menu') {
+        NativeBridge.setGrammar(mainmenu_grammar(), null, mainmenu_grammarHandler);
+      } else if ($.mobile.activePage.attr('id') == 'recent-transactions') {
+        NativeBridge.setGrammar(recenttransactions_grammar(), null, recenttransactions_grammarHandler);
+      }
     });
   };
 
@@ -436,9 +441,7 @@ var TransactionList = (function($) {
           container.slideUp();
         }
         remove_filter(type);
-        if (type == 'merchant') {
-          NativeBridge.setGrammar(recenttransactions_grammar(), null, recenttransactions_grammarHandler);
-        }
+        NativeBridge.setGrammar(recenttransactions_grammar(), null, recenttransactions_grammarHandler);
       });
       return true;
     }
