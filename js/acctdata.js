@@ -70,11 +70,26 @@ AccountData.account = (function($) {
         // Setup the default change handler to record active CC number
         dropdown.on('change', function() {
             _active_cc_number = dropdown[0].value;
+            populate_payment_due();
         });
         // Call the change handler to update the active CC number
         dropdown.change();
 
         return dropdown;
+    };
+
+    var dest_account = function() {
+        return $.grep(data.dest_accounts, function(acct) {
+            return acct.number === _active_cc_number;
+        })[0];
+    };
+
+    var populate_payment_due = function() {
+        var acct = dest_account();
+        var date = AccountData.utils.date_due(acct.datedue);
+        $('#minimum-payment-value').html('$' + acct.balance);
+        var duedate = $('#payment-due-value').html(date);
+        return acct;
     };
 
     // API bits
@@ -107,7 +122,8 @@ AccountData.account = (function($) {
         },
         active_cc_number: function() {
             return _active_cc_number;
-        }
+        },
+        populate_payment_due: populate_payment_due
     };
 })(jQuery);
 
@@ -203,7 +219,11 @@ AccountData.transactions = (function($) {
                 $('#amount').html(transaction.amount);
                 $('#datetime').html(transaction.full_date());
                 $('#merchant').html(transaction.merchant);
-                $('#mlocation').html(transaction.address + '<br>' + city);
+                if (transaction.address.length > 0) {
+                    $('#mlocation').html(transaction.address + '<br/>' + city);
+                } else {
+                    $('#mlocation').html(city);
+                }
                 if (city == "") {
                   $('#map').attr('src', "");
                 } else {
@@ -391,10 +411,22 @@ AccountData.utils = (function($) {
     return timestamp_to_object(transaction_date(transaction));
   };
 
+  var date_due = function(datedue) {
+      var tstamp = 0;
+      if (datedue.match(/^-?\d+$/)) {
+          tstamp = $.now() + parseFloat(datedue) * 24 * 60 * 60 * 1000;
+      } else {
+          tstamp = Date.parse(datedue);
+      }
+      var obj = timestamp_to_object(tstamp);
+      return obj.month + ' ' + obj.day + ', ' + obj.year;
+  };
+
   return {
     timestamp_to_object: timestamp_to_object,
     transaction_date: transaction_date,
     transaction_date_object: transaction_date_object,
-    merchant_decode: merchant_decode
+    merchant_decode: merchant_decode,
+    date_due: date_due
   };
 })(jQuery);

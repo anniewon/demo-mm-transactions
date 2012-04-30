@@ -7,7 +7,7 @@
 }
 
 .ui-content {
-    padding: 10px !important;
+    padding: 8px !important;
 }
 
 .page-content {
@@ -22,16 +22,16 @@
 .logo {
     background: url("../img/logo.png") no-repeat;
     width: 320px;
-    height: 42px;
+    height: 38px;
 }
 
 .header-button {
     width: 50px;
     height: 28px;
-    padding-top: 4px;
+    padding-top: 2px;
 }
 .header-button-2 {
-    padding-top: 4px;
+    padding-top: 2px;
 }
 
 /* Buttons */
@@ -46,10 +46,13 @@
     font-size: 12px;
 }
 
+#dispute-button span.ui-btn-inner {
+    padding-left: 20px !important;
+}
+
 .btn-cont {
     float: left;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     width: 100%;
 }
 
@@ -161,13 +164,14 @@ div.card-bits span.card-type {
     font-size: 10.2pt;
     padding: 0;
     margin: 0;
-    line-height: 2.2em;
+    line-height: 2.25em;
+    padding-left: 8px !important;
 }
 div.card-info {
     float: right;
     border-left: 1px solid #CCC;
     margin: 0;
-    padding: 0 0 0 10px;
+    padding: 0 0 0 8px;
     height: 31px;
     overflow: hidden;
 }
@@ -194,6 +198,15 @@ div.charge-details,
 div#charge-list {
     color: white;
     text-shadow: none;
+}
+div.charge-details {
+    padding-top: 0 !important;
+}
+div.charge-details div.ui-content {
+    padding: 5px 0 !important;
+}
+div.charge-details li.ui-li {
+    padding: 0.3em 10px !important;
 }
 
 div#charge-list div.heading {
@@ -243,7 +256,10 @@ div.search-terms > div > span.cancel {
 
 .detail-type {
     color: #06467C;
-    font-size: 8pt;
+    font-size: 7.5pt;
+    line-height: 1.7em;
+    white-space: nowrap;
+    width: 35%;
 }
 
 ul.charge-details-values li {
@@ -253,8 +269,10 @@ ul.charge-details-values li div.ui-grid-b {
     padding: 5px 0px;
 }
 ul.charge-details-values li div.double {
-    width: 66.666%;
-    font-size: 8pt;
+    width: 65%;
+    font-size: 8.8pt;
+    padding-left: 5px;
+    line-height: 1.4em;
 }
 
 .top-border {
@@ -397,6 +415,47 @@ ul.rating li {
     -moz-border-radius: 0px 4px 4px 0px;
     border-radius: 0px 4px 4px 0px;
     border-right: 0 !important;
+}
+
+.payment-due-notice {
+    position: fixed;
+    height: 28.8px;
+    z-index: 2;
+    width: 100%;
+    padding: 0;
+}
+
+.payment-due-label {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 6.2pt;
+    line-height: 1.15em;
+    padding: 5px 7px 4px 8px;
+    color: #666;
+    float: left;
+}
+
+.payment-value {
+    font-size: 12pt;
+    font-weight: bold;
+    line-height: 28.8px;
+    float: left;
+}
+
+.right-border {
+    border-right: 1px solid #AAA;
+    width: 48% !important;
+}
+
+.left-border {
+    border-left: 1px solid #FFF;
+    width: 49% !important;
+}
+
+#map {
+    -webkit-border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    border-radius: 4px 4px 4px 4px;
 }
 
 /* Chat */
