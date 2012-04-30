@@ -1,6 +1,5 @@
 var gAcctNumber = 2;
-var gDynamicGrammarRootUrl = 'grammars/dynamicgram.pl';
-//var gDynamicGrammarRootUrl = "../../perl/transdemo/grammars/dynamicgram.pl";
+var gDynamicGrammarRootUrl = "../../perl/transdemo/grammars/dynamicgram.pl";
 var gMerchantDelim = "<DELIM>";
 
 //-----------------------------------------------------------------------------
