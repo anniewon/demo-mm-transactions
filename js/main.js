@@ -301,7 +301,7 @@ function transactiondetail_grammarHandler(result) {
       NativeBridge.setGrammar("grammars/transactiondetail.grxml", null, transactiondetail_grammarHandler);
       TransactionList.show_prev_transaction();
 
-    } else if (interp == "go back") {
+    } else if (interp == "back to list") {
       transactiondetail_reco_errors = 0;
       $.mobile.changePage($("#recent-transactions"));
 
