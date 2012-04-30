@@ -17,36 +17,7 @@ function getUrlVar(name) {
 }
 
 function merchants() {
-  //TODO:
-  var merchants =
-    "Rock Bottom Brewery" + gMerchantDelim +
-    "Camera Cinemas" + gMerchantDelim +
-    "Pizza My Heart" + gMerchantDelim +
-    "Barnes & Noble" + gMerchantDelim +
-    "LeBoulanger" + gMerchantDelim +
-    "Starbucks" + gMerchantDelim +
-    "Quiznos" + gMerchantDelim +
-    "Safeway" + gMerchantDelim +
-    "Walgreens" + gMerchantDelim +
-    "Chevron" + gMerchantDelim +
-    "Lou Malnati's" + gMerchantDelim +
-    "Hotel Burnham" + gMerchantDelim +
-    "Elmwood Cafe" + gMerchantDelim +
-    "C & C Cleaners" + gMerchantDelim +
-    "Amazon.com" + gMerchantDelim +
-    "San Francisco Museum of Modern Art" + gMerchantDelim +
-    "Le Charm French Bistro" + gMerchantDelim +
-    "Netflix" + gMerchantDelim +
-    "Alameda 76" + gMerchantDelim +
-    "Otaez Mexican Restaurant" + gMerchantDelim +
-    "United Airlines" + gMerchantDelim +
-    "Macys" + gMerchantDelim +
-    "FasTrak" + gMerchantDelim +
-    "Comcast" + gMerchantDelim +
-    "Verizon Wireless" + gMerchantDelim +
-    "esurance" + gMerchantDelim +
-    "Alameda Auto Body";
-  return encodeURIComponent(merchants);
+  return encodeURIComponent(TransactionList.get_merchants(gMerchantDelim));
 }
 
 //-----------------------------------------------------------------------------
@@ -125,7 +96,7 @@ function mainmenu_grammarHandler(result) {
         TransactionList.filter_by_merchant(interp.value);
 
       } else if (field == "amount") {
-        TransactionList.filter_by_amount(parseInt(interp.value), interp.comparison.toLowerCase());
+        TransactionList.filter_by_amount(interp.value, interp.comparison.toLowerCase());
       }
 
       mainmenu_reco_errors = 0;
@@ -232,7 +203,7 @@ function recenttransactions_grammarHandler(result) {
         TransactionList.filter_by_merchant(interp.value);
 
       } else if (field == "amount") {
-        TransactionList.filter_by_amount(parseInt(interp.value), interp.comparison.toLowerCase());
+        TransactionList.filter_by_amount(interp.value, interp.comparison.toLowerCase());
       }
 
       recenttransactions_reco_errors = 0;
