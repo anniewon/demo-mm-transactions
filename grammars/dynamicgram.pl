@@ -284,7 +284,11 @@ use constant GRXML => << 'End';
 End
 
 use constant MAINMENU_ROOT_RULES => << 'End';
-      <item><item repeat="0-1">show</item> recent <ruleref uri="#charges"/><tag>out.action = "recent transactions"</tag></item>
+      <item>
+        <item repeat="0-1">show</item>
+        <item repeat="0-1">recent</item>
+        <ruleref uri="#charges"/><tag>out.action = "recent transactions"</tag>
+      </item>
       <item>make a payment<tag>out.action = "payment"</tag></item>
       <item>find an a t m<tag>out.action = "atm"</tag></item>
       <item>rewards points<tag>out.action = "rewards"</tag></item>
@@ -320,9 +324,7 @@ use constant RECENTTRANSACTIONS_EXTRA_RULES => << 'End';
       <item>
         show
         <item repeat="0-1">details of</item>
-        <one-of>
-          <item>the <ruleref uri="#ordering"/><tag>out = rules.ordering - 1;</tag></item>
-        </one-of>
+        the <ruleref uri="#ordering"/><tag>out = rules.ordering - 1;</tag>
         <item repeat="0-1">
           <one-of>
             <item>one</item>
