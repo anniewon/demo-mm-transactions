@@ -85,10 +85,8 @@ AccountData.account = (function($) {
     };
 
     var populate_payment_due = function() {
-        console.log('populate_payment_due');
         var acct = dest_account();
-        console.log(acct.number);
-        var date = AccountData.utils.date_due(acct.datedue);
+        var date = AccountData.utils.date_due(acct);
         $('#minimum-payment-value').html('$' + acct.balance);
         var duedate = $('#payment-due-value').html(date);
         return acct;
@@ -409,8 +407,14 @@ AccountData.utils = (function($) {
     return timestamp_to_object(transaction_date(transaction));
   };
 
-  var date_due = function(date) {
-      var obj = timestamp_to_object(Date.parse(date));
+  var date_due = function(acct) {
+      var tstamp = 0;
+      if (acct.datedue.match(/^-?\d+$/)) {
+          tstamp = $.now() + parseFloat(acct.datedue) * 24 * 60 * 60 * 1000;
+      } else {
+          tstamp = Date.parse(acct.datedue);
+      }
+      var obj = timestamp_to_object(tstamp);
       return obj.month + ' ' + obj.day + ', ' + obj.year;
   };
 
