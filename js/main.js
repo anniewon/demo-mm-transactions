@@ -1,4 +1,4 @@
-var gAcctNumber = 1;
+var gAcctNumber = 2;
 var gDynamicGrammarRootUrl = "../../perl/transdemo/grammars/dynamicgram.pl";
 var gMerchantDelim = "<DELIM>";
 
@@ -97,7 +97,6 @@ function mainmenu_show() {
 function mainmenu_beforehide() {
   NativeBridge.cancelAudio();
 }
-
 
 function mainmenu_grammarHandler(result) {
   if (result != null && result.length > 0) {
