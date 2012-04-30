@@ -2,9 +2,6 @@ var AccountData = AccountData || {};
 
 // Use this BaseUrl attribute to change the global location of the data
 AccountData.BaseUrl = 'data/acctdata';
-//AccountData.BaseUrl = location.protocol + '//' +
-//    location.hostname + '/~natefair/247demo/data/acctdata';
-//    location.hostname + '/demo-mm-transactions/data/acctdata';
 
 /*
  * Account Data Loader

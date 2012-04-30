@@ -31,10 +31,11 @@
 
 <div data-role="page" id="main-menu" data-title="Main Menu">
   <script type="text/javascript">
-    $('#main-menu').on('pagebeforeshow', mainmenu_init);
+    $('#main-menu').on('pagebeforeshow', mainmenu_beforeshow);
+    $('#main-menu').on('pageshow', mainmenu_show);
+    $('#main-menu').on('pagebeforehide', mainmenu_beforehide);
   </script>
 
-  <!-- Funky-fresh fixed header -->
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo"></div>
     <div data-role="content" class="card-bits" data-theme="d">
@@ -78,16 +79,20 @@
 
 <div id="recent-transactions" data-role="page">
   <script type="text/javascript">
-    $('#recent-transactions').on('pagebeforeshow', recenttransactions_init);
+    $('#recent-transactions').on('pagebeforeshow', recenttransactions_beforeshow);
+    $('#recent-transactions').on('pageshow', recenttransactions_show);
+    $('#recent-transactions').on('pagebeforehide', recenttransactions_beforehide);
     $('#recent-transactions').on('pageshow', function() {
-      $('#charges-list').listview('refresh');
     });
   </script>
 
   <div data-role="header" data-position="fixed" data-theme="b">
-    <div class="logo"></div>
-    <a href="#main-list" data-rel="back" data-role="button" data-icon="">Back</a>
-    <a href="#pay-now" data-role="button" data-icon="">Pay Now</a>
+    <div class="logo">
+      <table width="100%" border="0"><tr>
+        <!-- Don't use data-rel="back", just force it to go to the main menu -->
+        <td align="left"><a href="#main-menu" data-role="none"><img src="img/back.png" class="header-button"></a></td>
+      </tr></table>      
+    </div>
     <div data-role="content" class="card-bits" data-theme="d">
       <span class="card-type" data-role="content">Personal Credit Card</span>
       <div class="card-info" id="last-4-digits"></div>
@@ -107,12 +112,17 @@
 
 <div id="transaction-detail" data-role="page">
   <script type="text/javascript">
-    $('#transaction-detail').on('pagebeforeshow', transactiondetail_init);
+    $('#transaction-detail').on('pagebeforeshow', transactiondetail_beforeshow);
+    $('#transaction-detail').on('pageshow', transactiondetail_show);
+    $('#transaction-detail').on('pagebeforehide', transactiondetail_beforehide);
   </script>
 
   <div data-role="header" data-position="fixed" data-theme="b">
-    <div class="logo"></div>
-    <a href="#transaction-list" data-rel="back" data-role="button" data-icon="">Back</a>
+    <div class="logo">
+      <table width="100%" border="0"><tr>
+        <td align="left"><a href="#transaction-list" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"></a></td>
+      </tr></table>
+    </div>
     <div data-role="content" class="card-bits" data-theme="d">
       <span class="card-type" data-role="content">Personal Credit Card</span>
       <div class="card-info" id="last-4-digits-detail"></div>
@@ -196,12 +206,15 @@
 
 <div id="dispute" data-role="page">
   <script type="text/javascript">
-    $('#dispute').on('pagebeforeshow', dispute_init);
+    $('#dispute').on('pagebeforeshow', dispute_beforeshow);
   </script>
 
   <div data-role="header" data-position="fixed" data-theme="b">
-    <div class="logo"></div>
-    <a href="#transaction-detail" data-rel="back" data-role="button" data-icon="">Back</a>
+    <div class="logo">
+      <table width="100%" border="0"><tr>
+        <td align="left"><a href="#transaction-detail" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"></a></td>
+      </tr></table>
+    </div>
     <div data-role="content" class="card-bits" data-theme="d">
       <span class="card-type" data-role="content">Personal Credit Card</span>
       <div class="card-info" id="last-4-digits-dispute"></div>
@@ -231,12 +244,15 @@
 
 <div id="survey" data-role="page">
   <script type="text/javascript">
-    $('#survey').on('pagebeforeshow', survey_init);
+    $('#survey').on('pagebeforeshow', survey_beforeshow);
   </script>
 
   <div data-role="header" data-position="fixed" data-theme="b">
-    <div class="logo"></div>
-    <a href="#dispute" data-rel="back" data-role="button" data-icon="">Back</a>
+    <div class="logo">
+      <table width="100%" border="0"><tr>
+        <td align="left"><a href="#dispute" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"></a></td>
+      </tr></table>
+    </div>
   </div>
   <div data-role="content">
     <div class="help-msg">Please share your feedback:</div>
@@ -266,9 +282,15 @@
 </div>
 
 <div id="chat" data-role="page">
+  <script type="text/javascript">
+    $('#chat').on('pageshow', chat_show);
+  </script>
   <div data-role="header" data-position="fixed" data-theme="b">
-    <div class="logo"></div>
-    <a href="" data-rel="back" data-role="button" data-icon="" class="ui-btn-right">Done</a>
+    <div class="logo">
+      <table width="100%" border="0"><tr>
+        <td align="right"><a href="" data-rel="back" data-role="none"><img src="img/done.png" class="header-button"></a></td>
+      </tr></table>
+    </div>
   </div>
 
   <div data-role="content">
