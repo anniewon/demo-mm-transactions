@@ -44,13 +44,22 @@
     </div>
   </div>
 
+  <div class="card-bits payment-due-notice">
+   <div class="ui-grid-a">
+     <div class="ui-block-a right-border">
+       <div class="payment-due-label">MINIMUM<br />PAYMENT</div>
+       <div id="minimum-payment-value" class="payment-value"></div>
+     </div>
+     <div class="ui-block-b left-border">
+      <div class="payment-due-label">PAYMENT<br />DUE</div>
+      <div id="payment-due-value" class="payment-value"></div>
+     </div>
+   </div>
+  </div>
+
   <!-- Menu-tastic Main -->
   <div id="main-list" data-role="content">
-    <!-- PII -->
-    <div class="ui-grid-a" data-role="content">
-      <div class="ui-block-a" style="color: white; text-shadow: none">Amount: $10.00</div>
-      <div class="ui-block-b" style="text-align: right; color: white; text-shadow: none">Due: Jan-10-2012</div>
-    </div>
+    <div data-role="content" style="line-height: 0.8em">&nbsp;</div>
     <!-- Navigation -->
     <div class="ui-grid-b">
       <div class="ui-block-a main-menu-item-cont">
@@ -159,8 +168,8 @@
     </div>
 
     <!-- Map -->
-    <div data-role="content">
-      <img alt="Merchant Map" id="map" src="" width="288" height="200" />
+    <div>
+      <img alt="Merchant Map" id="map" src="" width="304" height="200" />
 <!--
       <ul data-role="listview" data-inset="true" style="margin: 0; padding: 0;">
         <li style="margin:0;padding:2px;">

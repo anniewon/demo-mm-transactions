@@ -70,11 +70,28 @@ AccountData.account = (function($) {
         // Setup the default change handler to record active CC number
         dropdown.on('change', function() {
             _active_cc_number = dropdown[0].value;
+            populate_payment_due();
         });
         // Call the change handler to update the active CC number
         dropdown.change();
 
         return dropdown;
+    };
+
+    var dest_account = function() {
+        return $.grep(data.dest_accounts, function(acct) {
+            return acct.number === _active_cc_number;
+        })[0];
+    };
+
+    var populate_payment_due = function() {
+        console.log('populate_payment_due');
+        var acct = dest_account();
+        console.log(acct.number);
+        var date = AccountData.utils.date_due(acct.datedue);
+        $('#minimum-payment-value').html('$' + acct.balance);
+        var duedate = $('#payment-due-value').html(date);
+        return acct;
     };
 
     // API bits
@@ -107,7 +124,8 @@ AccountData.account = (function($) {
         },
         active_cc_number: function() {
             return _active_cc_number;
-        }
+        },
+        populate_payment_due: populate_payment_due
     };
 })(jQuery);
 
@@ -387,10 +405,16 @@ AccountData.utils = (function($) {
     return timestamp_to_object(transaction_date(transaction));
   };
 
+  var date_due = function(date) {
+      var obj = timestamp_to_object(Date.parse(date));
+      return obj.month + ' ' + obj.day + ', ' + obj.year;
+  };
+
   return {
     timestamp_to_object: timestamp_to_object,
     transaction_date: transaction_date,
     transaction_date_object: transaction_date_object,
-    merchant_decode: merchant_decode
+    merchant_decode: merchant_decode,
+    date_due: date_due
   };
 })(jQuery);
