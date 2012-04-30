@@ -441,9 +441,7 @@ var TransactionList = (function($) {
           container.slideUp();
         }
         remove_filter(type);
-        if (type == 'merchant') {
-          NativeBridge.setGrammar(recenttransactions_grammar(), null, recenttransactions_grammarHandler);
-        }
+        NativeBridge.setGrammar(recenttransactions_grammar(), null, recenttransactions_grammarHandler);
       });
       return true;
     }
