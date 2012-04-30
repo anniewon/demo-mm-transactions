@@ -435,9 +435,9 @@ function survey_grammarHandler(result) {
       $.mobile.changePage($("#main-menu"));
 
     } else if (interp == "submit") {
-      // TODO:
-      NativeBridge.log("survey_grammarHandler - not implemented");
-      survey_reco_errors++;
+      // just make it go to the main menu for now
+      survey_reco_errors = 0;
+      $.mobile.changePage($("#main-menu"));
 
     } else if (interp == "chat") {
       survey_reco_errors = 0;
