@@ -290,9 +290,9 @@ AccountData.transactions = (function($) {
 */
         getData: getData,
         getMerchants: function() {
-            return getData().transactions.map(function(transaction) {
+            return $.unique(getData().transactions.map(function(transaction) {
                 return transaction.merchant;
-            });
+            }).sort()).sort();
         }
      };
 })(jQuery);

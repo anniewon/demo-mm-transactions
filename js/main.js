@@ -67,8 +67,14 @@ function mainmenu_grammar() {
 
 function mainmenu_beforeshow() {
   AccountData.account.init(gAcctNumber);
-  AccountData.account.initDropdown('last-4-digits-main', false, function(data) {
-    TransactionList.init();
+  AccountData.account.initDropdown('last-4-digits-main', false, function(dropdown, data) {
+    // Callback sets up onchange handler for dropdown
+    dropdown.on('change', function () {
+        TransactionList.init();
+    });
+
+    // Initiate onchange event
+    dropdown.change();
   });
   TransactionList.clear_filters();
 }
