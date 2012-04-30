@@ -414,7 +414,7 @@ AccountData.utils = (function($) {
   var date_due = function(datedue) {
       var tstamp = 0;
       if (datedue.match(/^-?\d+$/)) {
-          tstamp = $.now() + parseFloat(datedue) * 24 * 60 * 60 * 1000;
+          tstamp = $.now() + (parseFloat(datedue) * 24 * 60 * 60 * 1000) * -1;
       } else {
           tstamp = Date.parse(datedue);
       }
