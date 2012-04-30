@@ -219,7 +219,11 @@ AccountData.transactions = (function($) {
                 $('#amount').html(transaction.amount);
                 $('#datetime').html(transaction.full_date());
                 $('#merchant').html(transaction.merchant);
-                $('#mlocation').html(transaction.address + '<br>' + city);
+                if (transaction.address.length > 0) {
+                    $('#mlocation').html(transaction.address + '<br/>' + city);
+                } else {
+                    $('#mlocation').html(city);
+                }
                 if (city == "") {
                   $('#map').attr('src', "");
                 } else {
