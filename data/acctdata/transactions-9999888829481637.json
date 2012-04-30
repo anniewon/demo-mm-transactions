@@ -20,7 +20,7 @@
       {"id": 2251, "name": "Netflix", "address": "",  "city": "Los Altos", "state": "CA", "zipcode": "", "amount": "$14.23", "daysago": 11, "time": "07:29", "zone": "PDT"},
       {"id": 2252, "name": "Quiznos", "address": "951 Marina Village Pkwy",  "city": "Alameda", "state": "CA", "zipcode": "94501", "amount": "$7.29", "daysago": 12, "time": "13:05", "zone": "PDT"},
       {"id": 2253, "name": "Starbucks", "address": "720 Atlantic Ave",  "city": "Alameda", "state": "CA", "zipcode": "94501", "amount": "$3.96", "daysago": 13, "time": "07:39", "zone": "PDT"},
-      {"id": 2254, "name": " Alameda 76", "address": "1541 Park St",  "city": "Alameda", "state": "CA", "zipcode": "94501", "amount": "$61.44", "daysago": 13, "time": "07:17", "zone": "PDT"},
+      {"id": 2254, "name": "Alameda 76", "address": "1541 Park St",  "city": "Alameda", "state": "CA", "zipcode": "94501", "amount": "$61.44", "daysago": 13, "time": "07:17", "zone": "PDT"},
       {"id": 2255, "name": "Otaez Mexican Restaurant", "address": "1619 Webster St",  "city": "Alameda", "state": "CA", "zipcode": "94501", "amount": "$12.64", "daysago": 14, "time": "13:28", "zone": "PDT"},
       {"id": 2256, "name": "United Airlines", "address": "",  "city": "Chicago", "state": "IL", "zipcode": "", "amount": "$251.94", "daysago": 15, "time": "08:02", "zone": "CDT"},
       {"id": 2257, "name": "C & C Cleaners", "address": "2942 College Ave",  "city": "Berkeley", "state": "CA", "zipcode": "94705", "amount": "$27.36", "daysago": 15, "time": "17:23", "zone": "CDT"},
