@@ -8,7 +8,7 @@
       <item><ruleref uri="#dispute"/><tag>out = "dispute";</tag></item>
       <item><ruleref uri="#next"/><tag>out = "next";</tag></item>
       <item><ruleref uri="#previous"/><tag>out = "previous";</tag></item>
-      <item>back to list</item>
+      <item><ruleref uri="#back"/><tag>out = "back to list";</tag></item>
       <item><ruleref uri="#chat"/><tag>out = "chat";</tag></item>
     </one-of>
   </rule>
@@ -23,6 +23,13 @@
       </one-of>
     </item>
     <item repeat="0-1"><ruleref uri="#charge"/></item>    
+  </rule>
+
+  <rule id="back" scope="private">
+    <one-of>
+      <item>go back</item>
+      <item>back to list</item>
+    </one-of>
   </rule>
 
   <rule id="next" scope="private">
