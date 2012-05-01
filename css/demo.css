@@ -85,13 +85,35 @@
 
 /* Main menu */
 
-.main-menu-item-cont {
-    max-height: 95px;
+#main-menu-nav {
+    /*width: 320px;*/
+    padding: 5px;
 }
 
-.main-menu-item {
-    height: 95px;
+div.main-menu-item-cont {
+    height: 106px;
+    max-height: 106px;
+    width: 104px !important;
+    max-width: 104px !important;
+}
+
+div.center-button {
+    width: 101px !important;
+    max-width: 101px !important;
+}
+
+div.second-row {
+    height: 108px;
+    max-height: 108px;
+}
+
+img.main-menu-item {
+    height: 100%;
     width: 100%;
+}
+
+.center-button {
+/*    width: 100px !important;*/
 }
 
 /* Recent transactions and transaction details */
@@ -169,13 +191,21 @@ div.card-bits span.card-type {
     line-height: 2.25em;
     padding-left: 8px !important;
 }
+
 div.card-info {
     float: right;
-    border-left: 1px solid #CCC;
+    border-left: 1px solid #FFF;
     margin: 0;
     padding: 0 0 0 8px;
     height: 31px;
     overflow: hidden;
+    width: 115px;
+}
+div.second-left-border {
+    float: right;
+    padding: 0;
+    margin: 0;
+    border-left: 1px solid #AAA;
 }
 div.card-info div.ui-select {
     float: right;
@@ -194,6 +224,7 @@ div.card-info div.ui-select span.ui-btn-inner {
 div#last-4-digits {
     padding-top: 0;
     margin-top: 0;
+    width: 112px;
 }
 
 div.charge-details,
@@ -449,11 +480,17 @@ ul.rating li {
 
 .right-border {
     border-right: 1px solid #AAA;
+}
+
+div.payment-due-notice div.right-border {
     width: 48% !important;
 }
 
 .left-border {
     border-left: 1px solid #FFF;
+}
+
+div.payment-due-notice div.left-border {
     width: 49% !important;
 }
 

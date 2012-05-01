@@ -40,7 +40,7 @@
     <div class="logo"></div>
     <div data-role="content" class="card-bits" data-theme="d">
       <span class="card-type" data-role="content">Personal Credit Card</span>
-      <div class="card-info" id="last-4-digits-main"></div>
+      <div class="second-left-border"><div class="card-info left-border" id="last-4-digits-main"></div></div>
     </div>
     <div class="card-bits payment-due-notice">
       <div class="ui-grid-a">
@@ -57,26 +57,26 @@
   </div>
 
   <!-- Menu-tastic Main -->
-  <div id="main-list" data-role="content">
-    <div data-role="content" style="line-height: 0.8em">&nbsp;</div>
+  <div id="main-list">
+    <div data-role="content" style="line-height: 1em">&nbsp;</div>
     <!-- Navigation -->
-    <div class="ui-grid-b">
+    <div class="ui-grid-b" id="main-menu-nav">
       <div class="ui-block-a main-menu-item-cont">
         <img alt="Recent Transactions" src="img/menu1.png" class="main-menu-item" onclick='$.mobile.changePage($("#recent-transactions"))' />
       </div>
-      <div class="ui-block-b main-menu-item-cont">
+      <div class="ui-block-b main-menu-item-cont center-button">
         <img alt="Make a Payment" src="img/menu2.png" class="main-menu-item" onclick='javascript:;' />
       </div>
       <div class="ui-block-c main-menu-item-cont">
         <img alt="Find an ATM" src="img/menu3.png" class="main-menu-item" onclick='javascript:;' />
       </div>
-      <div class="ui-block-a main-menu-item-cont">
+      <div class="ui-block-a main-menu-item-cont second-row">
         <img alt="Reward Points" src="img/menu4.png" class="main-menu-item" onclick='javascript:;' />
       </div>
-      <div class="ui-block-b main-menu-item-cont">
+      <div class="ui-block-b main-menu-item-cont second-row center-button">
         <img alt="Contact Us" src="img/menu5.png" class="main-menu-item" onclick='javascript:;' />
       </div>
-      <div class="ui-block-c main-menu-item-cont">
+      <div class="ui-block-c main-menu-item-cont second-row">
         <img alt="Report a Missing Card" src="img/menu6.png" class="main-menu-item" onclick='javascript:;' />
       </div>
     </div>
@@ -98,13 +98,13 @@
     <div class="logo">
       <table width="100%" border="0"><tr>
         <!-- Don't use data-rel="back", just force it to go to the main menu -->
-        <td align="left"><a href="#main-menu" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
+        <td align="left"><a href="#main-menu" data-role="none"><img src="img/back.png" height="28px" class="header-button"/></a></td>
         <td align="right"><a href="" data-role="none"><img src="img/paynow.png" class="header-button-2" height="28px"/></a></td>
       </tr></table>      
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
       <span class="card-type" data-role="content">Personal Credit Card</span>
-      <div class="card-info" id="last-4-digits"></div>
+      <div class="second-left-border"><div class="card-info left-border" id="last-4-digits"></div></div>
     </div>
     <div id="search-terms" class="card-bits search-terms" style="display: none;">
     </div>
@@ -130,12 +130,12 @@
     <div class="logo">
       <table width="100%" border="0"><tr>
         <!-- Don't use data-rel="back", just force it to go to the recent transactions list -->
-        <td align="left"><a href="#recent-transactions" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
+        <td align="left"><a href="#recent-transactions" data-role="none"><img src="img/back.png" height="28px" class="header-button"/></a></td>
       </tr></table>
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
       <span class="card-type" data-role="content">Personal Credit Card</span>
-      <div class="card-info" id="last-4-digits-detail"></div>
+      <div class="second-left-border"><div class="card-info left-border" id="last-4-digits-detail"></div></div>
     </div>
   </div>
 
@@ -189,12 +189,12 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <td align="left"><a href="#recent-transactions" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
+        <td align="left"><a href="#recent-transactions" data-rel="back" data-role="none"><img src="img/back.png" height="28px" class="header-button"/></a></td>
       </tr></table>
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
       <span class="card-type" data-role="content">Personal Credit Card</span>
-      <div class="card-info" id="last-4-digits-detail-payment"></div>
+      <div class="second-left-border"><div class="card-info left-border" id="last-4-digits-detail-payment"></div></div>
     </div>
   </div>
 
@@ -225,12 +225,12 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <td align="left"><a href="#transaction-detail" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
+        <td align="left"><a href="#transaction-detail" data-rel="back" data-role="none"><img src="img/back.png" height="28px" class="header-button"/></a></td>
       </tr></table>
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
       <span class="card-type" data-role="content">Personal Credit Card</span>
-      <div class="card-info" id="last-4-digits-dispute"></div>
+      <div class="second-left-border"><div class="card-info left-border" id="last-4-digits-dispute"></div></div>
     </div>
   </div>
 
@@ -258,12 +258,13 @@
 <div id="survey" data-role="page">
   <script type="text/javascript">
     $('#survey').on('pagebeforeshow', survey_beforeshow);
+    $('#survey').on('pageshow', survey_onshow);
   </script>
 
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <td align="left"><a href="#dispute" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
+        <td align="left"><a href="#dispute" data-rel="back" data-role="none"><img src="img/back.png" height="28px" class="header-button"/></a></td>
       </tr></table>
     </div>
   </div>
@@ -283,7 +284,7 @@
         </div>
         <div class="field no-bor">
           <p>If you feel we can improve this service, please provide your comments.</p>
-          <textarea></textarea>
+          <textarea id="survey-feedback"></textarea>
         </div>
       </div>
     </div>
