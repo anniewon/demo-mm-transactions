@@ -430,6 +430,10 @@ function survey_grammarHandler(result) {
   }
 }
 
+function survey_onshow() {
+  $('#survey-feedback').focus();
+}
+
 function survey_doStar(vid){
   if (vid == 0 && !$('li > span').hasClass('star-act')) {
     if ($('#s-'+vid).hasClass('star')) {
