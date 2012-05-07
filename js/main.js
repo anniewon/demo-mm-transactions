@@ -1,8 +1,15 @@
 var gAcctNumber = 2;
-var gDynamicGrammarRootUrl = location.href.replace("/content/", "/perl/") + "grammars/dynamicgram.pl";
+var gDynamicGrammarRootUrl = getDynamicGrammarRootUrl();
 var gMerchantDelim = "<DELIM>";
 
 //-----------------------------------------------------------------------------
+
+function getDynamicGrammarRootUrl() {
+  var url = location.href;
+  url = url.substring(0, url.lastIndexOf('/') + 1);
+  url = url.replace("/content/", "/perl/") + "grammars/dynamicgram.pl";
+  return url;
+}
 
 function getUrlVar(name) {
   var vars = [], hash;

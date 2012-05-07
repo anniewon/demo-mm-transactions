@@ -1,7 +1,7 @@
 /* html, body { height: 100%; } */
 
 .ui-page {
-    background: #013b70 url(../img/bg.png) no-repeat !important;
+    background:  url(../img/amex/bg.png)  !important;
     width: 320px;
     min-height: 480px;
 }
@@ -12,7 +12,7 @@
 
 .page-content {
     width: 100%;
-    background: #fff;
+    background: #ffffff;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -20,7 +20,7 @@
 }
 
 .logo {
-    background: url("../img/logo.png") no-repeat;
+    background: url("../img/amex/logo.png") no-repeat;
     width: 320px;
     height: 38px;
 }
@@ -65,7 +65,7 @@
 
 .big-btn .ui-btn-text {
     font-size: 14px !important;
-    color: #0b335c !important;
+    color: #26759b !important;
     background: url("../img/cross.png") no-repeat scroll 0px 1px transparent;
     padding-left: 19px;
     height: 14px;
@@ -126,7 +126,7 @@ ul#charges-list li div.list-partial {
     float: left;
     overflow: auto;
     padding: 4px 10px;
-    color: #06467C;
+    color: #26759b;
 }
 ul#charges-list li div.list-amount {
     float: right;
@@ -179,7 +179,7 @@ div.card-bits {
     overflow: hidden;
 }
 div.card-bits span.card-type {
-    color: #06467C;
+    color: #26759b;
     font-weight: bold;
     font-size: 10.2pt;
     padding: 0;
@@ -217,15 +217,18 @@ div.card-info div.ui-select span.ui-btn-inner {
     padding-left: 0;
     padding-right: 30px !important;
 }
-div#last-4-digits {
+div#last-4-digits-main,
+div#last-4-digits,
+div#last-4-digits-detail,
+div#last-4-digits-payment,
+div#last-4-digits-dispute {
     padding-top: 0;
     margin-top: 0;
-    width: 112px;
+    width: 122px;
 }
-
 div.charge-details,
 div#charge-list {
-    color: white;
+    color: #ffffff;
     text-shadow: none;
 }
 div.charge-details {
@@ -241,7 +244,7 @@ div.charge-details li.ui-li {
 div#charge-list div.heading {
     text-align: center;
     font-size: 14pt;
-    color: white;
+    color: #26759b;
 }
 
 div.search-terms {
@@ -285,7 +288,7 @@ div.search-terms > div > span.cancel {
 }
 
 .detail-type {
-    color: #06467C;
+    color: #26759b;
     font-size: 7.5pt;
     line-height: 1.7em;
     white-space: nowrap;
@@ -350,8 +353,8 @@ ul.charge-details-values li div.double {
 
 .help-msg {
     font-size: 18px;
-    color: #fff;
-    text-shadow: 0px -1px 0px #555;
+    color: #26759b;
+    text-shadow: none;
     display: block;
     text-align: center;
     margin: 5px 0 15px 0;
@@ -499,7 +502,7 @@ div.payment-due-notice div.left-border {
 /* Chat */
 
 .logo-chat {
-    background: url("../img/logo-chat.png") no-repeat;
+    background: url("../img/amex/logo-chat.png") no-repeat;
     width: 320px;
     height: 42px;
 }

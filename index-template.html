@@ -17,10 +17,10 @@
   <script type="text/javascript" src="js/jqm.page.params.js"></script>
 
   <!-- Application CSS/Javascript -->
-  <link type="text/css" rel="stylesheet" href="css/demo.css" />
+  <link type="text/css" rel="stylesheet" href="css/demo-$CLIENT_NAME.css" />
   <script type="text/javascript" src="common/js/bridge.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
-  <script type="text/javascript" src="js/acctdata.js"></script>
+  <script type="text/javascript" src="js/acctdata-$CLIENT_NAME.js"></script>
   <script type="text/javascript" src="js/transaction_list.js"></script>
 
  <script type="text/javascript">
@@ -39,7 +39,7 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo"></div>
     <div data-role="content" class="card-bits" data-theme="d">
-      <span class="card-type" data-role="content">Personal Credit Card</span>
+      <span class="card-type" data-role="content">$CARD_NAME</span>
       <div class="second-left-border"><div class="card-info left-border" id="last-4-digits-main"></div></div>
     </div>
     <div class="card-bits payment-due-notice">
@@ -62,22 +62,22 @@
     <!-- Navigation -->
     <div class="ui-grid-b" id="main-menu-nav">
       <div class="ui-block-a main-menu-item-cont">
-        <img alt="Recent Transactions" src="img/menu1.png" class="main-menu-item" onclick='$.mobile.changePage($("#recent-transactions"))' />
+        <img alt="Recent Transactions" src="img/$CLIENT_NAME/menu1.png" class="main-menu-item" onclick='$.mobile.changePage($("#recent-transactions"))' />
       </div>
       <div class="ui-block-b main-menu-item-cont center-button">
-        <img alt="Make a Payment" src="img/menu2.png" class="main-menu-item" onclick='javascript:;' />
+        <img alt="Make a Payment" src="img/$CLIENT_NAME/menu2.png" class="main-menu-item" onclick='javascript:;' />
       </div>
       <div class="ui-block-c main-menu-item-cont">
-        <img alt="Find an ATM" src="img/menu3.png" class="main-menu-item" onclick='javascript:;' />
+        <img alt="Find an ATM" src="img/$CLIENT_NAME/menu3.png" class="main-menu-item" onclick='javascript:;' />
       </div>
       <div class="ui-block-a main-menu-item-cont second-row">
-        <img alt="Reward Points" src="img/menu4.png" class="main-menu-item" onclick='javascript:;' />
+        <img alt="Reward Points" src="img/$CLIENT_NAME/menu4.png" class="main-menu-item" onclick='javascript:;' />
       </div>
       <div class="ui-block-b main-menu-item-cont second-row center-button">
-        <img alt="Contact Us" src="img/menu5.png" class="main-menu-item" onclick='javascript:;' />
+        <img alt="Contact Us" src="img/$CLIENT_NAME/menu5.png" class="main-menu-item" onclick='javascript:;' />
       </div>
       <div class="ui-block-c main-menu-item-cont second-row">
-        <img alt="Report a Missing Card" src="img/menu6.png" class="main-menu-item" onclick='javascript:;' />
+        <img alt="Report a Missing Card" src="img/$CLIENT_NAME/menu6.png" class="main-menu-item" onclick='javascript:;' />
       </div>
     </div>
   </div>
@@ -97,13 +97,12 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <!-- Don't use data-rel="back", just force it to go to the main menu -->
-        <td align="left"><a href="#main-menu" data-role="none"><img src="img/home.png" class="header-button"/></a></td>
-        <td align="right"><a href="" data-role="none"><img src="img/paynow.png" class="header-button" /></a></td>
+        <td align="left"><a href="#main-menu" data-rel="back" data-role="none"><img src="img/$CLIENT_NAME/home.png" class="header-button"/></a></td>
+        <td align="right"><a href="" data-role="none"><img src="img/$CLIENT_NAME/paynow.png" class="header-button" /></a></td>
       </tr></table>      
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
-      <span class="card-type" data-role="content">Personal Credit Card</span>
+      <span class="card-type" data-role="content">$CARD_NAME</span>
       <div class="second-left-border"><div class="card-info left-border" id="last-4-digits"></div></div>
     </div>
     <div id="search-terms" class="card-bits search-terms" style="display: none;">
@@ -129,12 +128,11 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <!-- Don't use data-rel="back", just force it to go to the recent transactions list -->
-        <td align="left"><a href="#recent-transactions" data-role="none"><img src="img/recent.png" class="header-button"/></a></td>
+        <td align="left"><a href="#recent-transactions" data-rel="back" data-role="none"><img src="img/$CLIENT_NAME/recent.png" class="header-button"/></a></td>
       </tr></table>
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
-      <span class="card-type" data-role="content">Personal Credit Card</span>
+      <span class="card-type" data-role="content">$CARD_NAME</span>
       <div class="second-left-border"><div class="card-info left-border" id="last-4-digits-detail"></div></div>
     </div>
   </div>
@@ -189,11 +187,11 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <td align="left"><a href="#recent-transactions" data-rel="back" data-role="none"><img src="img/recent.png" class="header-button"/></a></td>
+        <td align="left"><a href="#recent-transactions" data-rel="back" data-role="none"><img src="img/$CLIENT_NAME/recent.png" class="header-button"/></a></td>
       </tr></table>
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
-      <span class="card-type" data-role="content">Personal Credit Card</span>
+      <span class="card-type" data-role="content">$CARD_NAME</span>
       <div class="second-left-border"><div class="card-info left-border" id="last-4-digits-detail-payment"></div></div>
     </div>
   </div>
@@ -225,11 +223,11 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <td align="left"><a href="#transaction-detail" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
+        <td align="left"><a href="#transaction-detail" data-rel="back" data-role="none"><img src="img/$CLIENT_NAME/back.png" class="header-button"/></a></td>
       </tr></table>
     </div>
     <div data-role="content" class="card-bits" data-theme="d">
-      <span class="card-type" data-role="content">Personal Credit Card</span>
+      <span class="card-type" data-role="content">$CARD_NAME</span>
       <div class="second-left-border"><div class="card-info left-border" id="last-4-digits-dispute"></div></div>
     </div>
   </div>
@@ -264,7 +262,7 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo">
       <table width="100%" border="0"><tr>
-        <td align="left"><a href="#dispute" data-rel="back" data-role="none"><img src="img/back.png" class="header-button"/></a></td>
+        <td align="left"><a href="#dispute" data-rel="back" data-role="none"><img src="img/$CLIENT_NAME/back.png" class="header-button"/></a></td>
       </tr></table>
     </div>
   </div>
@@ -303,7 +301,7 @@
   <div data-role="header" data-position="fixed" data-theme="b">
     <div class="logo-chat">
       <table width="100%" border="0"><tr>
-        <td align="right"><a href="" data-rel="back" data-role="none"><img src="img/done.png" class="header-button"/></a></td>
+        <td align="right"><a href="" data-rel="back" data-role="none"><img src="img/$CLIENT_NAME/done.png" class="header-button"/></a></td>
       </tr></table>
     </div>
   </div>

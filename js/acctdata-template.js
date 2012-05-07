@@ -26,7 +26,7 @@ AccountData.account = (function($) {
     var _active_acct_number = null;
     var _active_cc_number = null;
 
-    var mc_img = '<img src="img/mastercard.png" height="28px" style="padding-top: 2px;"/>';
+    var mc_img = '<img src="img/$CLIENT_NAME/card.png" height="28px" style="padding-top: 2px;"/>';
 
 
     var makeAccountUrl = function() {
@@ -42,11 +42,11 @@ AccountData.account = (function($) {
 
 
     var select_option = function(cc_number, selected) {
-        var last_4 = cc_number.substr(-4);
+        var last_digits = cc_number.substr(-$LAST_NUM_CARD_DIGITS);
         var extra  = $.inArray(cc_number, [selected, _active_cc_number]) < 0 ?
                      '' : ' selected="selected"';
         var option = '<option value="' + cc_number + '"' + extra +
-                     '>...' + last_4 + '</option>';
+                     '>$LAST_CARD_DIGITS_PREFIX' + last_digits + '</option>';
         return $(option);
     };
 
