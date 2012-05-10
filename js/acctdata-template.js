@@ -30,7 +30,7 @@ AccountData.account = (function($) {
 
 
     var makeAccountUrl = function() {
-        return AccountData.BaseUrl + '/' + _active_acct_number + '.json';
+        return AccountData.BaseUrl + '/' + _active_acct_number + '-$CLIENT_NAME.json';
     };
 
 
@@ -71,6 +71,7 @@ AccountData.account = (function($) {
         dropdown.on('change', function() {
             _active_cc_number = dropdown[0].value;
             populate_payment_due();
+            populate_acct_name();
         });
         // Call the change handler to update the active CC number
         dropdown.change();
@@ -89,6 +90,16 @@ AccountData.account = (function($) {
         var date = AccountData.utils.date_due(acct.datedue);
         $('#minimum-payment-value').html('$' + acct.balance);
         var duedate = $('#payment-due-value').html(date);
+        return acct;
+    };
+
+    var populate_acct_name = function() {
+        var acct = dest_account();
+        $('#acctname-main').html(acct.name);
+        $('#acctname').html(acct.name);
+        $('#acctname-detail').html(acct.name);
+        $('#acctname-detail-payment').html(acct.name);
+        $('#acctname-dispute').html(acct.name);
         return acct;
     };
 
@@ -123,7 +134,8 @@ AccountData.account = (function($) {
         active_cc_number: function() {
             return _active_cc_number;
         },
-        populate_payment_due: populate_payment_due
+        populate_payment_due: populate_payment_due,
+        populate_acct_name: populate_acct_name
     };
 })(jQuery);
 

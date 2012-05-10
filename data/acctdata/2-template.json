@@ -19,7 +19,7 @@
       {"name": "savings", "routing": "999000361", "number": "9999928740"}
    ],
    "dest_accounts": [
-      {"name": "platinum", "number": "9999888829481637", "balance": "1338.93", "datedue": "-2"},
-      {"name": "gold", "number": "9999888826759163", "balance": "978.13", "datedue": "-5"}
+      {"name": "$CARD_NAME1", "number": "9999888829481637", "balance": "1338.93", "datedue": "-2"},
+      {"name": "$CARD_NAME2", "number": "9999888826759163", "balance": "978.13", "datedue": "-5"}
    ]
 }
