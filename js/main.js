@@ -5,9 +5,7 @@ var gMerchantDelim = "<DELIM>";
 //-----------------------------------------------------------------------------
 
 function getDynamicGrammarRootUrl() {
-  var url = location.href;
-  url = url.substring(0, url.lastIndexOf('/') + 1);
-  url = url.replace("/content/", "/perl/") + "grammars/dynamicgram.pl";
+  var url = "grammars/dynamicgram.pl";
   return url;
 }
 
